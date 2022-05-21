@@ -187,7 +187,7 @@
           popup += '<p style="font-size:8px" <br></p><button class="button" onclick="OpenModal({{pin.latitude}})">more</button><br>';
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
-          {alt: name, title: name}).addTo(map)
+          {alt: '{{pin.name}}', title: '{{pin.name}}'}).addTo(map)
           .bindPopup(popup);
         </script>
       {% endfor %}
