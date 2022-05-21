@@ -141,7 +141,7 @@
           popup.className = 'popup';
           var cancel = document.createElement('div');
           cancel.className = 'cancel';
-          cancel.innerHTML = 'x';
+          cancel.innerHTML = '✖';
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
@@ -167,7 +167,7 @@
           popup += '<button style="float:right" onclick="OpenModal({{pin.latitude}})">more</button><br>'
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
-          {alt: name, title: name}).addTo(map)
+          {alt: name, title: name, className: 'click_pin'}).addTo(map)
           .bindPopup(popup);
         </script>
       {% endfor %}
