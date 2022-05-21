@@ -82,20 +82,11 @@
       
     </script>
 
-    <form action="{% url 'main' %}" method="post" >
-      {% csrf_token %}
-      <input type="filter" men='{document.getElementById("men")}' >
-    </form>
-
 
 
     <div id="map"></div>
-    <div class="overlay">
-      <div class="popup">
-        <div onclick="CloseModal()">&#10006;</div> <!-- Shows Close Icon -->
-        <h3>Popup Content</h3>
-      </div>
-    </div>
+
+
     <script>
       var map = L.map('map').setView([33.646, -117.843], 17);
 
@@ -108,15 +99,24 @@
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
-    function OpenModal() {
-      let element = document.getElementsByClassName('overlay')
-      console.log(element)
-      element[0].div.display = "block"
-    }
-    function CloseModal() {
-      let element = document.getElementById('overlay')
-      element.display = 'none'
-    }
+
+      function OpenModal()
+      {
+        
+        var popup = document.createElement('div');
+        popup.className = 'popup';
+        popup.id = 'test';
+        var cancel = document.createElement('div');
+        cancel.className = 'cancel';
+        cancel.innerHTML = 'close';
+        cancel.onclick = function (e) { popup.parentNode.removeChild(popup) };
+        var message = document.createElement('p');
+        message.innerHTML = "This is a test message";
+        popup.appendChild(message);                                    
+        popup.appendChild(cancel);
+        document.body.appendChild(popup);
+        console.log(popup);
+      }
     </script>
     
     <ul>
