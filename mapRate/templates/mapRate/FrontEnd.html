@@ -21,20 +21,56 @@
           Men: <input type="checkbox" id="men">
           Women: <input type="checkbox" id="women">
           Gender Neutral: <input type="checkbox" id="genderNeutral">
-
-          <script>
-            var men = document.getElementById("men");
-            var women = document.getElementById("women");
-            var genderNeutral = document.getElementById("genderNeutral");
-          </script>
         </div>
+
+        <br>
+
         <p>Distance</p>
-        <div id="distance"></div>
+        <div id="distance">
+          <input type="range" min="1" max="10" value="50" id="slider_distance">
+          <p>Distance: <span id="slider_val"></span></p>
+        </div>
+
+        <br>
+
         <p>Hygene Products</p>
-        <div id="hygene"></div>
+        <div id="hygene">
+          Free: <input type="checkbox" id="freeHygene">
+          Paid: <input type="checkbox" id="paidHygene">
+        </div>
+
+        <br>
+        
         <p>Rating</p>
-        <div id="rating"></div>
+        <div id="rating">
+          5 Star: <input type="checkbox" id="rate5">
+          4 Star: <input type="checkbox" id="rate4">
+          3 Star: <input type="checkbox" id="rate3">
+          2 Star: <input type="checkbox" id="rate2">
+          1 Star: <input type="checkbox" id="rate1">
+        </div>
     </div>
+
+    <script>
+      var men = document.getElementById("men");
+      var women = document.getElementById("women");
+      var freeHygene = document.getElementById("freeHygene");
+      var paidHygene = document.getElementById("paidHygene");
+      var rate5 = document.getElementById("rate5");
+      var rate4 = document.getElementById("rate4");
+      var rate3 = document.getElementById("rate3");
+      var rate2 = document.getElementById("rate2");
+      var rate1 = document.getElementById("rate1");
+
+      var slider = document.getElementById("slider_distance");
+      var output = document.getElementById("slider_val");
+      output.innerHTML = slider.value;
+
+      slider.oninput = function() 
+      {
+        output.innerHTML = this.value;
+      }
+    </script>
 
 
     <div id="map"></div>
