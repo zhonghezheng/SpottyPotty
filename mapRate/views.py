@@ -8,22 +8,25 @@ from .models import Bathroom, Pin
 def main(request):
 
     if (request.method == "POST"):
-        b = Bathroom.objects.get(name="name")
         r = request.POST
-        if r["cleanliness"] != "":
-            b.cleanliness.total += int(r["cleanliness"])
-            b.cleanliness.count += 1
-        if r["hygiene"] != "":
-            b.hygiene.total += int(r["cleanliness"])
-            b.hygiene.count += 1
-        if r["accessibility"] != "":
-            b.accessibility.total += int(r["cleanliness"])
-            b.accessibility.count += 1
-        if r["safety"] != "":
-            b.safety.total += int(r["cleanliness"])
-            b.safety.count += 1
-        if r["periodProd"] != "":
-            b.periodProducts=True
-        b.save()
-            
+        if r["type"] == "rate":
+            b = Bathroom.objects.get(name="name")
+            if r["cleanliness"] != "":
+                b.cleanliness.total += int(r["cleanliness"])
+                b.cleanliness.count += 1
+            if r["hygiene"] != "":
+                b.hygiene.total += int(r["cleanliness"])
+                b.hygiene.count += 1
+            if r["accessibility"] != "":
+                b.accessibility.total += int(r["cleanliness"])
+                b.accessibility.count += 1
+            if r["safety"] != "":
+                b.safety.total += int(r["cleanliness"])
+                b.safety.count += 1
+            if r["periodProdFree"] != "":
+                b.freePeriodProducts=True
+            if r["periodProdPaid"] != "":
+                b.paidPeriodProducts=True
+            b.save()
+        
     return render(request, "mapRate/FrontEnd.html", {"pins": Pin.objects.all()})

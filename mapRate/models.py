@@ -18,7 +18,7 @@ class Rating(models.Model):
 # Create your models here.
 class Bathroom(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
-    genders = models.CharField(max_length=1) 
+    gender = models.CharField(max_length=1) 
     freePeriodProducts = models.BooleanField()
     paidPeriodProducts = models.BooleanField()
 
@@ -53,6 +53,7 @@ class Pin(models.Model):
     bathroom_inclusive = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="i", blank=True, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()   
+    
 
     def __str__(self):
         return f"male: {str(self.bathroom_male)},\
