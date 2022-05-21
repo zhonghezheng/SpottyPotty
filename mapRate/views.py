@@ -5,8 +5,31 @@ from .models import Bathroom, Pin
 
 # Create your views here.
 
-def main(request):
+def filter_dict(pins, r):
+    for k in r:
+        r[k] = r[k][0]
+    if r["m"] == 'false' and r["f"] == 'false' and r["i"] == 'false':
+        r["m"] = "true"
+        r["f"] = "true"
+        r["i"] = "true"
+    filtered = []
+    for pin in pins:
+        candidates = []
+        if r["m"] == "true" and pin.bathroom_male is not None:
+            candidates.append(pin.bathroom_male)
+        if r["f"] == "true" and pin.bathroom_female is not None:
+            candidates.append(pin.bathroom_female)
+        if r["i"] == "true" and pin.bathroom_inclusive is not None:
+            candidates.append(pin.bathroom_inclusive)
+        candidates = list(filter(lambda b: b.avg >= float(r["rating"]), candidates))
+        candidates = list(filter(lambda b: r["paid"] == "false" or (r["paid"] == "true" and b.paidPeriodProducts), candidates))
+        candidates = list(filter(lambda b: r["free"] == "false" or (r["free"] == "true" and b.freePeriodProducts), candidates))
+        if len(candidates) > 0:
+            filtered.append(pin)
+    return filtered
 
+def main(request):
+    defaultPins = Pin.objects.all()
     if (request.method == "POST"):
         r = request.POST
         if r["type"] == "rate":
@@ -23,10 +46,10 @@ def main(request):
             if r["safety"] != "":
                 b.safety.total += int(r["cleanliness"])
                 b.safety.count += 1
-            if r["periodProdFree"] != "":
-                b.freePeriodProducts=True
-            if r["periodProdPaid"] != "":
-                b.paidPeriodProducts=True
+            if r["periodProd"] != "":
+                b.periodProducts=True
             b.save()
-        
-    return render(request, "mapRate/FrontEnd.html", {"pins": Pin.objects.all()})
+        elif r["type"] == "filter":
+            defaultPins = filter_dict(defaultPins, dict(r))
+            
+    return render(request, "mapRate/Frontend.html", {"pins": defaultPins})
