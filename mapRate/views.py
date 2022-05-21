@@ -9,15 +9,22 @@ from .models import Bathroom
 def main(request):
 
     if (request.method == "POST"):
-        if request.POST["type"] == "add":
-            r = request.POST
-           # newBathroom = Bathroom(name=r["name"], longitude=r["lon"], latitude=r['lat'], rating=r["rating"], peopleRated=1)
-
-            newBathroom.save()
-        elif request.POST["type"] == "rate":
-            r = request.POST
-           # b = Bathroom.objects.get(id=r["id"])
-            #b.rating = (b.peopleRated * b.rating + int(r["rating"])) / (b.peopleRated+1)
-            #b.peopleRated += 1
-           # b.save()
+        b = Bathroom.objects.get(name="name")
+        r = request.POST
+        if r["cleanliness"] != "":
+            b.cleanlinessTotal+=int(r["cleanliness"])
+            b.cleanlinessNo+=1
+        if r["hygiene"] != "":
+            b.hygieneProductsTotal+=int(r["hygiene"])
+            b.hygieneProductsNo+=1
+        if r["accessibility"] != "":
+            b.accessibilityTotal+=int(r["accessibility"])
+            b.accessibilityNo+=1
+        if r["safety"] != "":
+            b.safetyTotal+=int(r["safety"])
+            b.safetyNo+=1
+        if r["periodProd"] != "":
+            b.periodProducts=True
+        b.save()
+            
     return render(request, "mapRate/main.html", {"bathrooms": Bathroom.objects.all()})

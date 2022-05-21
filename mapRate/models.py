@@ -4,17 +4,26 @@ from django.db import models
 class Bathroom(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
     genders = models.CharField(max_length=1)
-    cleanliness = models.FloatField()
+    cleanlinessTotal = models.FloatField()
     cleanlinessNo = models.IntegerField(default=0)
-    hygeine_products = models.FloatField()
-    hygeine_productsNo = models.IntegerField(default=0)
-    accessibility = models.FloatField()
+    hygieneProductsTotal = models.FloatField()
+    hygieneProductsNo = models.IntegerField(default=0)
+    periodProducts = models.BooleanField()
+    accessibilityTotal = models.FloatField()
     accessibilityNo = models.IntegerField(default=0)
-    safety = models.FloatField()
+    safetyTotal = models.FloatField()
     safetyNo = models.IntegerField(default=0)
     latitude = models.FloatField()
     longitude = models.FloatField()
 
-
     def __str__(self):
         return f"{self.name}: ({self.latitude}, {self.longitude}), {self.rating}*"
+
+    def cAvg(self):
+        return self.cleanlinessTotal/self.cleanlinessNo
+    def hAvg(self):
+        return self.hygieneProductsTotal/hygieneProductsNo
+    def aAvg(self):
+        return self.accessibilityTotal/accessibilityNo
+    def sAvg(self):
+        return safetyTotal/safetyNo
