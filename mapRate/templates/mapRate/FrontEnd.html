@@ -119,6 +119,18 @@
         form.submit();
       }
       
+      function sendRating()
+      // UNFINISHED SEND RATING FUNCTION
+      {
+        var form = document.createElement('form');
+        form.action = "{% url 'main' %}";
+        form.method = "post";
+        form.innerHTML = '{% csrf_token %}\n<input type="text" value="rate" name="type">\n';
+        form.innerHTML += '<input type="text" name = "name" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "cleanliness" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "cleanliness" value='+men.checked+'>\n';
+      }
+
     </script>
 
 
@@ -188,7 +200,9 @@
           {
             popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}}<br>";
           }
-          popup += '<p style="font-size:8px" <br></p><button class="button" onclick="OpenModal({{pin.latitude}})">more</button><br>';
+          popup += `<p style="font-size:${8}px" <br></p>
+          <div><button class="ratebutton" onclick="sendRating()">rate</button>
+            <button class="button" onclick="OpenModal()">info</button><br></div>`;
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
           {alt: '{{pin.name}}', title: '{{pin.name}}'}).addTo(map)
