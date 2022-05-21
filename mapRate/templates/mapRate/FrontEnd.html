@@ -27,7 +27,20 @@
 
         <p>Distance</p>
         <div id="distance">
-          <input type="range" min="1" max="10" value="5" id="slider_distance">
+          <input type="range" min="0" max="1" value="0" step="0.1" id="slider_distance" list = "steplist">
+          <datalist id="steplist">
+            <option>0</option>
+            <option>0.1</option>
+            <option>0.2</option>
+            <option>0.3</option>
+            <option>0.4</option>
+            <option>0.5</option>
+            <option>0.6</option>
+            <option>0.7</option>
+            <option>0.8</option>
+            <option>0.9</option>
+            <option>1</option>
+        </datalist>
           <p>Distance: <span id="slider_val"></span></p>
         </div>
 
@@ -43,7 +56,15 @@
         
         <p>Rating</p>
         <div id="rating">
-          <input type="range" min="1" max="5" value="5" id="sliderRate_distance">
+          <input type="range" min="1" max="5" value="5" id="sliderRate_distance" list="steplistRate">
+          <datalist id="steplistRate">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </datalist>
           <p>Rating: <span id="sliderRate_val"></span></p>
         </div>
 
