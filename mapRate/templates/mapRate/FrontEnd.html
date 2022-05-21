@@ -27,7 +27,7 @@
 
         <p>Distance</p>
         <div id="distance">
-          <input type="range" min="1" max="10" value="50" id="slider_distance">
+          <input type="range" min="1" max="10" value="5" id="slider_distance">
           <p>Distance: <span id="slider_val"></span></p>
         </div>
 
@@ -43,11 +43,8 @@
         
         <p>Rating</p>
         <div id="rating">
-          5 Star: <input type="checkbox" id="rate5">
-          4 Star: <input type="checkbox" id="rate4">
-          3 Star: <input type="checkbox" id="rate3">
-          2 Star: <input type="checkbox" id="rate2">
-          1 Star: <input type="checkbox" id="rate1">
+          <input type="range" min="1" max="5" value="5" id="sliderRate_distance">
+          <p>Rating: <span id="sliderRate_val"></span></p>
         </div>
 
         <br>
@@ -58,29 +55,37 @@
     <script>
       var men = document.getElementById("men");
       var women = document.getElementById("women");
-      var freeHygene = document.getElementById("freeHygiene");
-      var paidHygene = document.getElementById("paidHygiene");
-      var rate5 = document.getElementById("rate5");
-      var rate4 = document.getElementById("rate4");
-      var rate3 = document.getElementById("rate3");
-      var rate2 = document.getElementById("rate2");
-      var rate1 = document.getElementById("rate1");
+      var inclusive = document.getElementById("genderNeutral");
+      var freeHygiene = document.getElementById("freeHygiene");
+      var paidHygiene = document.getElementById("paidHygiene");
 
       var slider = document.getElementById("slider_distance");
       var output = document.getElementById("slider_val");
       output.innerHTML = slider.value;
 
+      var sliderRate = document.getElementById("sliderRate_distance");
+      var outputRate = document.getElementById("sliderRate_val");
+      outputRate.innerHTML = sliderRate.value;
+
       slider.oninput = function() 
       {
-        output.innegitrHTML = this.value;
+        output.innerHTML = this.value;
       }
 
-      function buttonClicked ()
+      sliderRate.oninput = function() 
       {
-        
+        outputRate.innerHTML = this.value;
+      }
+
+      function buttonClicked()
+      {
+        var form = document.createElement('form');
+        form.innerHTML = '<input type= "filter"'+' men = "'+men.checked+ '" women = "' + women.checked + '" inclusive = "' +inclusive.checked +'" freeHygiene="' + freeHygiene.checked + '" paidHygiene="' + paidHygiene.checked +'" Distance="' +slider.value+'" Rating="'+ sliderRate.value+'" >';
+        console.log(form); 
       }
       
     </script>
+
 
 
 
@@ -100,14 +105,15 @@
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
 
-      // TODO: CENTER POPUP BY DOING OUTER DIV
       function OpenModal()
       {
+        
         var popup = document.createElement('div');
         popup.className = 'popup';
+        popup.id = 'test';
         var cancel = document.createElement('div');
         cancel.className = 'cancel';
-        cancel.innerHTML = 'x';
+        cancel.innerHTML = 'close';
         cancel.onclick = function (e) { popup.parentNode.removeChild(popup) };
         var message = document.createElement('p');
         message.innerHTML = "This is a test message";
