@@ -16,8 +16,8 @@
 
     <div id="sidemap">
       <div id="content">
-      <h2> Filter </h2>
-        <p>Gender</p>
+      <h2> Preferences </h2>
+        <p id="subt">Gender</p>
         <div id="gender">
           Men: <input type="checkbox" id="men">
           <br>
@@ -30,7 +30,7 @@
         <br>
 
         <div id="distance">
-          <p>Distance: <span id="slider_val"></span></p>
+          <p id="subt">Distance: <span id="slider_val"></span></p>
           <input type="range" min="0" max="1" value="0" step="0.1" id="slider_distance" list = "steplist">
           <datalist id="steplist">
             <option>0</option>
@@ -49,7 +49,7 @@
 
         <br>
 
-        <p>Hygene Products</p>
+        <p id="subt">Hygene Products</p>
         <div id="hygene">
           Free: <input type="checkbox" id="freeHygiene">
           Paid: <input type="checkbox" id="paidHygiene">
@@ -58,8 +58,8 @@
         <br>
         
         <div id="rating">
-          <p>Rating: <span id="sliderRate_val"></span></p>
-          <input type="range" min="1" max="5" value="5" id="sliderRate_distance" list="steplistRate">
+          <p id="subt">Rating: <span id="sliderRate_val"></span></p>
+          <input type="range" min="1" max="5" value="5" id="sliderRate_distance" list="steplistRate" >
           <datalist id="steplistRate">
             <option>0</option>
             <option>1</option>
@@ -104,7 +104,6 @@
       {
         var form = document.createElement('form');
         form.innerHTML = '<input type= "filter"'+' men = "'+men.checked+ '" women = "' + women.checked + '" inclusive = "' +inclusive.checked +'" freeHygiene="' + freeHygiene.checked + '" paidHygiene="' + paidHygiene.checked +'" Distance="' +slider.value+'" Rating="'+ sliderRate.value+'" >';
-        console.log(form); 
       }
       
     </script>

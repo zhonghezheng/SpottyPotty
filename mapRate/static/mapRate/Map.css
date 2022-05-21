@@ -6,23 +6,36 @@
     --grey: #dcd9d6;
     --darkgreen: #726b3b;
 }
+
 #sidemap
 {
     float:left;
     background-color: var(--sidebar);
     width:20%;
     height:100%;
+    border-right: var(--darkgreen);
+    margin: 0;
+    padding: 0;
 }
 
 #content
 {
     margin-left: 10px;
+    size: auto;
+}
+
+#subt
+{
+    font-size: 20px;
+    font-weight: bold;
 }
 #map 
 { 
     float:right;
     height: 100%; 
-    width: 80%; 
+    width: 79.5%; 
+    margin-left: 0;
+    padding: 0;
 }
 
 
