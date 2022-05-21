@@ -55,8 +55,10 @@ def main(request):
             if r["safety"] != "":
                 b.safety.total += int(r["cleanliness"])
                 b.safety.count += 1
-            if r["periodProd"] != "":
-                b.periodProducts=True
+            if r["free"] != "":
+                b.freeperiodProducts=True
+            if r["paid"] !="":
+                b.paidperiodProducts=True
             b.save()
         elif r["type"] == "filter":
             defaultPins = filter_dict(defaultPins, dict(r))
