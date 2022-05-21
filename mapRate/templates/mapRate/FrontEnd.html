@@ -151,7 +151,11 @@
         form.innerHTML = '{% csrf_token %}\n<input type="text" value="rate" name="type">\n';
         form.innerHTML += '<input type="text" name = "name" value='+men.checked+'>\n';
         form.innerHTML += '<input type="text" name = "cleanliness" value='+men.checked+'>\n';
-        form.innerHTML += '<input type="text" name = "cleanliness" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "hygiene" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "accessibility" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "safety" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "free" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "paid" value='+men.checked+'>\n';
       }
 
     </script>
@@ -270,6 +274,56 @@
           console.log(divToAdd);
           return divToAdd;
         }
+
+      function openRating(bname, m, f, i) {
+        console.log(m, f, i);
+        if (!clicked) {
+          clicked = true;
+          var outerpopup = document.createElement('div');
+          outerpopup.className = 'outerpopup';
+          
+          var cancel = document.createElement('div');
+          cancel.className = 'cancel';
+          cancel.innerHTML = '✖';
+          cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
+          clicked = false; };
+          var message = document.createElement('p');
+          outerpopup.appendChild(cancel);
+          outerpopup.appendChild(message);
+          document.body.appendChild(outerpopup);
+          message.innerHTML = '<h1> &nbsp'+bname+'</h1>\n&nbsp'
+          if (m != 'None'){
+            message.innerHTML += '<button id="mbuttonmore"> Male </button>';
+          }
+          if (f != 'None'){
+            message.innerHTML += '<button id="fbuttonmore"> Female </button>';
+          }
+          if (i != 'None'){
+            message.innerHTML += '<button id="ibuttonmore"> Gender Inclusive </button>\n';
+          } 
+          if (m != 'None'){
+            message.innerHTML += giveInnerDiv(m,  "mmoredisplay"); // CHANGE GIVE INNER DIV TO DIFF FUNCTION
+          }
+          if (f != 'None'){
+            message.innerHTML += giveInnerDiv(f, "fmoredisplay");
+          }
+          if (i!='None'){
+            message.innerHTML += giveInnerDiv(i, "imoredisplay");
+          }
+          if (m != 'None'){
+            document.getElementById("mbuttonmore").addEventListener('click', () => load_display('mmoredisplay'));
+          }
+          if (f != 'None'){
+            document.getElementById("fbuttonmore").addEventListener('click', () => load_display('fmoredisplay'));
+          }
+          if (i != 'None'){
+            document.getElementById("ibuttonmore").addEventListener('click', () => load_display('imoredisplay'));
+          }
+          load_display("");
+        }
+      }
+
+      function innerDivRate(b, )
     </script>
     
     <ul>
@@ -279,18 +333,18 @@
           popup += '<p style="font-size:1px" <br></p>';
           if ('{{pin.bathroom_male.avg}}' != 0)
           {
-            popup += "Men's Bathroom: {{pin.bathroom_male.avg}}<br>";
+            popup += "Men's Bathroom: {{pin.bathroom_male.avg}} stars<br>";
           }
           if ('{{pin.bathroom_female.avg}}' != 0)
           {
-            popup += "Women's Bathroom: {{pin.bathroom_female.avg}}<br>";
+            popup += "Women's Bathroom: {{pin.bathroom_female.avg}} stars<br>";
           }
           if ('{{pin.bathroom_inclusive.avg}}' != 0)
           {
-            popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}}<br>";
+            popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}} stars<br>";
           }
           popup += `<p style="font-size:${8}px" <br></p>
-          <div><button class="ratebutton" onclick="sendRating()">rate</button>
+          <div><button class="ratebutton" onclick="openRating(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">rate</button>
           <button class="button" onclick="OpenModal(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">info</button><br></div>`;
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
