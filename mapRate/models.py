@@ -48,6 +48,7 @@ class Bathroom(models.Model):
         return f"{self.name}"
 
 class Pin(models.Model):
+    name = models.CharField(max_length=255)
     bathroom_male = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="m", blank=True, null=True)
     bathroom_female = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="f", blank=True, null=True)
     bathroom_inclusive = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="i", blank=True, null=True)
