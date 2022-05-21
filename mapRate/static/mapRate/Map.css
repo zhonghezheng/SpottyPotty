@@ -5,6 +5,8 @@
     --green: #b6e59e;
     --grey: #dcd9d6;
     --darkgreen: #726b3b;
+    --blue: #2B83CB;
+    --lightblue: #b3d3ec;
 }
 
 #sidemap
@@ -38,23 +40,33 @@
     padding: 0;
 }
 
+.button {
+    border-radius:2px;
+    border: transparent;
+}
+
+.click_pin {
+    background-color: var(--yellow);
+    border: 1.5 solid var(--blue);
+}
 
 .popup{
     position:absolute;
+    border-radius:10px;
     display:relative;
     justify-content:center;
     margin:100px auto;
     width:200px;
-    height:150px;
-    font-family:verdana;
+    height:200px;
+    font-family:Arial,sans-serif;
     font-size:13px;
     padding:10px;
-    background-color:rgb(240,240,240);
-    border:2px solid grey;
-    z-index:100000000000000000;
+    background-color:var(--yellow);
+    border:1.5px solid var(--blue);
+    z-index: 100000000000000000;
     vertical-align:middle;
     align-items:center;
-    opacity:100%;
+    opacity: 100%;
 }
 
 .outerpopup {
@@ -72,14 +84,14 @@
     cursor:pointer;
     margin:0;
     float:right;
-    height:17px;
-    width:20px;
-    background-color:darksalmon;
+    height:15px;
+    width:15px;
+    background-color:transparent;
     font-weight:bold;
     text-align:center;
     font-size:11px;
-    color:white;
-    border-radius:3px;
+    color:var(--grey);
+    border-radius:4px;
     z-index:100000000000000000;
     }
 
