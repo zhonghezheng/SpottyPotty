@@ -147,9 +147,10 @@
           var outerpopup = document.createElement('div');
           outerpopup.className = 'outerpopup';
           console.log(outerpopup);
-          var popup = document.createElement('div');
-          outerpopup.appendChild(popup);
-          popup.className = 'popup';
+         // var popup = document.createElement('div');
+          
+          //outerpopup.appendChild(popup);
+          //popup.className = 'popup';
           var cancel = document.createElement('div');
           cancel.className = 'cancel';
           cancel.innerHTML = '✖';
@@ -157,10 +158,10 @@
           clicked = false; };
           var message = document.createElement('p');
           message.innerHTML = 'Hello' +pin; // TODO: PUT IN PIN INFORMATION
-          popup.appendChild(cancel);
-          popup.appendChild(message);
+          outerpopup.appendChild(cancel);
+          outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
-          console.log(popup);
+          console.log(outerpopup);
         }
       }
     </script>
