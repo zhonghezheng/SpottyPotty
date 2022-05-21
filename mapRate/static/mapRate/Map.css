@@ -12,9 +12,10 @@
     width: 80%; 
 }
 
+
 .popup{
     position:absolute;
-    display:flex;
+    display:relative;
     justify-content:center;
     margin:100px auto;
     width:200px;
@@ -27,7 +28,8 @@
     z-index:100000000000000000;
     }
 
-#outerpopup {
+.outerpopup {
+    position:absolute;
     display:flex;
     justify-content:center;
     width:100%;
@@ -35,17 +37,16 @@
     background-color:grey;
 }
 
-#cancel{
+.cancel{
     display:relative;
     cursor:pointer;
     margin:0;
     float:right;
-    height:10px;
-    width:14px;
-    padding:0 0 5px 0;
-    background-color:red;
-    text-align:center;
+    height:17px;
+    width:20px;
+    background-color:darksalmon;
     font-weight:bold;
+    text-align:center;
     font-size:11px;
     color:white;
     border-radius:3px;
