@@ -1,10 +1,23 @@
+:root
+{
+    --sidebar: #ddc8a2;
+    --yellow: #f0e7bc;
+    --green: #b6e59e;
+    --grey: #dcd9d6;
+    --darkgreen: #726b3b;
+}
 #sidemap
 {
     float:left;
+    background-color: var(--sidebar);
     width:20%;
     height:100%;
 }
 
+#content
+{
+    margin-left: 10px;
+}
 #map 
 { 
     float:right;

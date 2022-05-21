@@ -15,18 +15,22 @@
   <body>
 
     <div id="sidemap">
+      <div id="content">
       <h2> Filter </h2>
         <p>Gender</p>
         <div id="gender">
           Men: <input type="checkbox" id="men">
+          <br>
           Women: <input type="checkbox" id="women">
+          <br>
           Gender Neutral: <input type="checkbox" id="genderNeutral">
+          <br>
         </div>
 
         <br>
 
-        <p>Distance</p>
         <div id="distance">
+          <p>Distance: <span id="slider_val"></span></p>
           <input type="range" min="0" max="1" value="0" step="0.1" id="slider_distance" list = "steplist">
           <datalist id="steplist">
             <option>0</option>
@@ -41,7 +45,6 @@
             <option>0.9</option>
             <option>1</option>
         </datalist>
-          <p>Distance: <span id="slider_val"></span></p>
         </div>
 
         <br>
@@ -54,8 +57,8 @@
 
         <br>
         
-        <p>Rating</p>
         <div id="rating">
+          <p>Rating: <span id="sliderRate_val"></span></p>
           <input type="range" min="1" max="5" value="5" id="sliderRate_distance" list="steplistRate">
           <datalist id="steplistRate">
             <option>0</option>
@@ -65,12 +68,11 @@
             <option>4</option>
             <option>5</option>
         </datalist>
-          <p>Rating: <span id="sliderRate_val"></span></p>
         </div>
 
         <br>
         <button id="EnterBtn" onclick="buttonClicked()">Enter</button>
-
+      </div>
     </div>
 
     <script>
