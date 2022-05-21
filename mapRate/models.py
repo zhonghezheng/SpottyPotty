@@ -20,6 +20,7 @@ class Bathroom(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
     genders = models.CharField(max_length=1) 
     periodProducts = models.BooleanField()
+    # TODO: TALK ABOUT HOW TO IMPLEMENT DIFFERENT BOOLS FOR PERIOD PRODUCTS
 
     cleanliness = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="c")
     hygiene = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="h")
