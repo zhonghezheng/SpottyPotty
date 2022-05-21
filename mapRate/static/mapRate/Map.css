@@ -1,12 +1,13 @@
 :root
 {
-    --sidebar: #ddc8a2;
+    --sidebar: #ffe2c4;
     --yellow: #f0e7bc;
     --green: #b6e59e;
     --grey: #dcd9d6;
     --darkgreen: #726b3b;
     --blue: #2B83CB;
     --lightblue: #b3d3ec;
+    --lightyellow: #fff5ea;
 }
 
 #sidemap
@@ -31,6 +32,7 @@
     font-size: 20px;
     font-weight: bold;
 }
+
 #map 
 { 
     float:right;
@@ -40,14 +42,28 @@
     padding: 0;
 }
 
-.button {
-    border-radius:2px;
-    border: transparent;
+.flexbox {
+    display:flex;
 }
 
-.click_pin {
-    background-color: var(--yellow);
-    border: 1.5 solid var(--blue);
+.ratebutton {
+    cursor:pointer;
+    background-color:var(--lightblue);
+    border-radius:10%;
+    border: 1px solid var(--blue);
+    float:left;
+}
+
+.clear {
+    clear:both;
+}
+
+.button {
+    cursor:pointer;
+    background-color:var(--lightblue);
+    border-radius:10%;
+    border: 1px solid var(--blue);
+    float:right;
 }
 
 .outerpopup {
@@ -56,13 +72,14 @@
     top: 50%;
     left: 50%;
     width:50vw;
-    height:70vh;
+    height:50vh;
     transform: translate(-50%, -50%);
     z-index:100000000000000000;
     opacity: 100%;
-    background-color:var(--yellow);
-    border:2px solid black;
+    background-color:var(--lightyellow);
+    border:1px solid var(--blue);
     box-shadow: 0 0 0 100vmax rgba(0,0,0,.3);
+    border-radius: 1%;
 }
 
 .cancel{
@@ -79,9 +96,10 @@
     font-weight:bold;
     text-align:center;
     font-size:15px;
-    color:var(--blue);
+    color:var(--darkgreen);
     border-radius:4px;
     z-index:100000000000000000;
+    padding-right:1px;
     }
 
 #cancel:hover{

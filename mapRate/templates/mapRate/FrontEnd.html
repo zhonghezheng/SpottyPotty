@@ -6,9 +6,12 @@
 
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-    crossorigin=""></script>
+    crossorigin="">
+    </script>
 
     <link rel="stylesheet" href="../../static/mapRate/Map.css">
+
+
 
   </head>
 
@@ -19,19 +22,33 @@
       <h2> Preferences </h2>
         <p id="subt">Gender</p>
         <div id="gender">
+<<<<<<< HEAD
           Men: <input type="checkbox" id="men" value="{{settings.m}}">
           <br>
           Women: <input type="checkbox" id="women" value="{{settings.f}}">
           <br>
           Gender Neutral: <input type="checkbox" id="genderNeutral" value="{{settings.i}}">
+=======
+          <input type="checkbox" id="men"> Men
+          <br>
+          <input type="checkbox" id="women"> Women
+          <br>
+          <input type="checkbox" id="genderNeutral"> Gender Inclusive
+>>>>>>> 05802f2668cf8ba9649752c1b1499b61b7b8cfa8
           <br>
         </div>
 
         <br>
+        <br>
 
         <div id="distance">
+<<<<<<< HEAD
           <p id="subt">Distance: <span id="slider_val"></span></p>
           <input type="range" min="0" max="1" value="{{settings.distance}}" step="0.1" id="slider_distance" list = "steplist">
+=======
+          <p id="subt">Distance: <span id="slider_val"></span> miles</p>
+          <input type="range" min="0" max="1" value="0" step="0.1" id="slider_distance" list = "steplist">
+>>>>>>> 05802f2668cf8ba9649752c1b1499b61b7b8cfa8
           <datalist id="steplist">
             <option>0</option>
             <option>0.1</option>
@@ -78,7 +95,7 @@
         </script>
         <br>
 
-        <p id="subt">Hygene Products</p>
+        <p id="subt">Hygiene Products</p>
         <div id="hygene">
           Free: <input type="checkbox" id="freeHygiene" value="{{settings.free}}">
           Paid: <input type="checkbox" id="paidHygiene" value="{{settings.paid}}">
@@ -142,11 +159,40 @@
         form.innerHTML += '<input type="text" name ="paid" value='+paidHygiene.checked+'>\n';
         form.innerHTML += '<input type="number" name="distance" value='+slider.value+'>\n';
         form.innerHTML += '<input type="number" name="rating" value=' + sliderRate.value+'>\n';
+        
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        }
+
+        function showPosition(position) {
+          form.innerHTML += '<input type="number" name="longitude" value=' + position.coords.longitude+'>\n'; 
+          form.innerHTML += '<input type="number" name="latitude" value=' + position.coords.latitude+'>\n';
+
+          var circle = L.circle([position.coords.latitude, position.coords.longitude], {
+                color: 'blue',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 10
+            }).addTo(map)
+        }
+
         console.log(form);
         document.body.appendChild(form);
         form.submit();
       }
       
+      function sendRating()
+      // UNFINISHED SEND RATING FUNCTION
+      {
+        var form = document.createElement('form');
+        form.action = "{% url 'main' %}";
+        form.method = "post";
+        form.innerHTML = '{% csrf_token %}\n<input type="text" value="rate" name="type">\n';
+        form.innerHTML += '<input type="text" name = "name" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "cleanliness" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "cleanliness" value='+men.checked+'>\n';
+      }
+
     </script>
 
 
@@ -167,8 +213,18 @@
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
 
+      /*location tracking*/
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+
       var clicked = false;
-      function OpenModal(m, f, i)
+      function OpenModal(bname, m, f, i)
       {
         console.log(m, f, i);
         if (!clicked) {
@@ -182,30 +238,102 @@
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
-          message.innerHTML = '<h1> &nbsp'+name+'</h1>\n'
-          message.innerHTML += '&nbsp <button> Male </button> <button> Female </button> <button> Gender Inclusive </button>'
-          message.id = "popupmessage"
-          console.log(message);
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
+          message.innerHTML = '<h1> &nbsp'+bname+'</h1>\n&nbsp'
+          if (m != 'None'){
+            message.innerHTML += '<button id="mbuttonmore"> Male </button>';
+          }
+          if (f != 'None'){
+            message.innerHTML += '<button id="fbuttonmore"> Female </button>';
+          }
+          if (i != 'None'){
+            message.innerHTML += '<button id="ibuttonmore"> Gender Inclusive </button>\n';
+          } 
+          if (m != 'None'){
+            message.innerHTML += giveInnerDiv(m,  "mmoredisplay");
+          }
+          if (f != 'None'){
+            message.innerHTML += giveInnerDiv(f, "fmoredisplay");
+          }
+          if (i!='None'){
+            message.innerHTML += giveInnerDiv(i, "imoredisplay");
+          }
+          if (m != 'None'){
+            document.getElementById("mbuttonmore").addEventListener('click', () => load_display('mmoredisplay'));
+          }
+          if (f != 'None'){
+            document.getElementById("fbuttonmore").addEventListener('click', () => load_display('fmoredisplay'));
+          }
+          if (i != 'None'){
+            document.getElementById("ibuttonmore").addEventListener('click', () => load_display('imoredisplay'));
+          }
+          load_display("");
         }
       }
+
+      function load_display(status){
+        if (document.querySelector('#mmoredisplay') != null){
+          document.querySelector('#mmoredisplay').style.display = 'none';
+        }
+        if (document.querySelector('#fmoredisplay') != null){
+          document.querySelector('#fmoredisplay').style.display = 'none';
+        }
+        if (document.querySelector('#imoredisplay') != null){
+          document.querySelector('#imoredisplay').style.display = 'none';
+        }
+        if (status != ""){
+          document.getElementById(status).style.display = 'block';
+        }
+      }
+      function giveInnerDiv(b, id){
+          bArray = b.split(",");
+          divToAdd = '<div id = "'+id+'"><br/>&nbspGender: ' + bArray[0] + '<br/>';
+          if (bArray[1] == "True"){
+            divToAdd += '&nbspFree Period Products: Available <br/>';
+          }
+          else {
+             divToAdd += '&nbspFree Period Products: Not Available <br/>';
+          }
+          if (bArray[2] == "True"){
+            divToAdd+= '&nbspPaid Period Products: Available <br/>';
+          }
+          else {
+            divToAdd+= '&nbspPaid Period Products: Not Available <br/>';
+          }
+          divToAdd+="&nbspCleanliness: " + bArray[3] + " ⭐" + "<br/>"
+          divToAdd+="&nbspHygienic Products: " + bArray[4] + " ⭐" + "<br/>"
+          divToAdd+="&nbspSafety: " + bArray[5] + " ⭐" + "<br/>"
+          divToAdd+="&nbspAccessibility: " + bArray[6] + " ⭐" + "<br/>"
+          console.log(divToAdd);
+          return divToAdd;
+        }
     </script>
     
     <ul>
       {% for pin in pins %}
         <script>
-          // TODO: change garbage name string
-          var name = '{{pin.name}}'; // should be in the format {{pin.name}}
-          // WE NEED THE AVERAGES OF ALL BATHROOMS IN LOCATION
-          var average = 4; // should be in the format {{pin.average}}
+          popup = '<center><b>{{pin.name}}</b></center>';
+          popup += '<p style="font-size:1px" <br></p>';
+          if ('{{pin.bathroom_male.avg}}' != 0)
+          {
+            popup += "Men's Bathroom: {{pin.bathroom_male.avg}}<br>";
+          }
+          if ('{{pin.bathroom_female.avg}}' != 0)
+          {
+            popup += "Women's Bathroom: {{pin.bathroom_female.avg}}<br>";
+          }
+          if ('{{pin.bathroom_inclusive.avg}}' != 0)
+          {
+            popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}}<br>";
+          }
+          popup += `<p style="font-size:${8}px" <br></p>
+          <div><button class="ratebutton" onclick="sendRating()">rate</button>
+          <button class="button" onclick="OpenModal(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">info</button><br></div>`;
 
-          var popup = '<center><b>Donald Bren Hall</b></center>';
-          popup += 'Rating: 4.23<br>'; // CONSIDER CHANGING THIS TO VISUAL STARS
-          popup += '<button style="float:right" onclick="OpenModal(\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">more</button><br>'
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
-          {alt: name, title: name, className: 'click_pin'}).addTo(map)
+          {alt: '{{pin.name}}', title: '{{pin.name}}'}).addTo(map)
           .bindPopup(popup);
         </script>
       {% endfor %}
