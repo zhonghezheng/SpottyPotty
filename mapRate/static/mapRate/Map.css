@@ -41,13 +41,11 @@
 }
 
 .button {
-    border-radius:2px;
-    border: transparent;
-}
-
-.click_pin {
-    background-color: var(--yellow);
-    border: 1.5 solid var(--blue);
+    cursor:pointer;
+    background-color:var(--lightblue);
+    border-radius:10%;
+    border: 1px solid var(--blue);
+    float:right;
 }
 
 .outerpopup {
