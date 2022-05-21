@@ -100,15 +100,14 @@
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
 
+      // TODO: CENTER POPUP BY DOING OUTER DIV
       function OpenModal()
       {
-        
         var popup = document.createElement('div');
         popup.className = 'popup';
-        popup.id = 'test';
         var cancel = document.createElement('div');
         cancel.className = 'cancel';
-        cancel.innerHTML = 'close';
+        cancel.innerHTML = 'x';
         cancel.onclick = function (e) { popup.parentNode.removeChild(popup) };
         var message = document.createElement('p');
         message.innerHTML = "This is a test message";

@@ -14,8 +14,8 @@
 
 .popup{
     position:absolute;
-    top:0px;
-    left:0px;
+    display:flex;
+    justify-content:center;
     margin:100px auto;
     width:200px;
     height:150px;
