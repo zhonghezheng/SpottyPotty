@@ -1,9 +1,10 @@
 from django.db import models
 
-class Rating():
+class Rating(models.Model):
     total = models.IntegerField(default=0)
     count = models.IntegerField(default=0)
     average = models.FloatField(default=0.0)
+    name = models.CharField(max_length=255, primary_key=True)
     
     def update_avg(self):
         if self.count == 0:
@@ -22,10 +23,10 @@ class Bathroom(models.Model):
     longitude = models.FloatField()    
     periodProducts = models.BooleanField()
 
-    cleanliness = models.ForeignKey(Rating, on_delete=models.PROTECT)
-    hygiene = models.ForeignKey(Rating, on_delete=models.PROTECT)
-    safety = models.ForeignKey(Rating, on_delete=models.PROTECT)
-    accessiblity = models.ForeignKey(Rating, on_delete=models.PROTECT)
+    cleanliness = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="c")
+    hygiene = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="h")
+    safety = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="s")
+    accessiblity = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="a")
 
     def update(self):
         self.cleanliness.update_avg()
