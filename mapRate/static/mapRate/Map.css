@@ -31,6 +31,7 @@
     font-size: 20px;
     font-weight: bold;
 }
+
 #map 
 { 
     float:right;
@@ -39,6 +40,8 @@
     margin-left: 0;
     padding: 0;
 }
+
+
 
 .button {
     border-radius:2px;
