@@ -169,23 +169,24 @@
       {% for pin in pins %}
         <script>
 
-          var popup = '<center><b>{{pin.name}}</b></center>';
+          popup = '<center><b>{{pin.name}}</b></center>';
+          popup += '<p style="font-size:1px" <br></p>';
           if ('{{pin.bathroom_male.avg}}' != 0)
           {
-            popup += "Men's Bathroom: {{pin.bathroom_male.avg}}<br>"
+            popup += "Men's Bathroom: {{pin.bathroom_male.avg}}<br>";
           }
           if ('{{pin.bathroom_female.avg}}' != 0)
           {
-            popup += "Women's Bathroom: {{pin.bathroom_female.avg}}<br>"
+            popup += "Women's Bathroom: {{pin.bathroom_female.avg}}<br>";
           }
           if ('{{pin.bathroom_inclusive.avg}}' != 0)
           {
-            popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}}<br>"
+            popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}}<br>";
           }
-          popup += '<button style="float:right" onclick="OpenModal({{pin.latitude}})">more</button><br>'
+          popup += '<p style="font-size:8px" <br></p><button class="button" onclick="OpenModal({{pin.latitude}})">more</button><br>';
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
-          {alt: name, title: name, className: 'click_pin'}).addTo(map)
+          {alt: name, title: name}).addTo(map)
           .bindPopup(popup);
         </script>
       {% endfor %}
