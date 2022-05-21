@@ -19,11 +19,11 @@
       <h2> Preferences </h2>
         <p id="subt">Gender</p>
         <div id="gender">
-          Men: <input type="checkbox" id="men">
+          Men: <input type="checkbox" id="men" value="{{settings.m}}">
           <br>
-          Women: <input type="checkbox" id="women">
+          Women: <input type="checkbox" id="women" value="{{settings.f}}">
           <br>
-          Gender Neutral: <input type="checkbox" id="genderNeutral">
+          Gender Neutral: <input type="checkbox" id="genderNeutral" value="{{settings.i}}">
           <br>
         </div>
 
@@ -31,7 +31,7 @@
 
         <div id="distance">
           <p id="subt">Distance: <span id="slider_val"></span></p>
-          <input type="range" min="0" max="1" value="0" step="0.1" id="slider_distance" list = "steplist">
+          <input type="range" min="0" max="1" value="{{settings.distance}}" step="0.1" id="slider_distance" list = "steplist">
           <datalist id="steplist">
             <option>0</option>
             <option>0.1</option>
@@ -47,19 +47,48 @@
         </datalist>
         </div>
 
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var men = document.getElementById("men");
+            var women = document.getElementById("women");
+            var inclusive = document.getElementById("genderNeutral");
+            if (inclusive.value == 'true') {
+              inclusive.checked=true;
+              inclusive.removeAttribute("value");
+            }
+            if (men.value == 'true') {
+              men.checked=true;
+              men.removeAttribute("value");
+            }
+            if (women.value == 'true') {
+              women.checked=true;
+              women.removeAttribute("value");
+            }
+            var freeHygiene = document.getElementById("freeHygiene")
+            var paidHygiene = document.getElementById("paidHygiene")
+            if (freeHygiene.value == 'true') {
+              freeHygiene.checked=true;
+              freeHygiene.removeAttribute("value");
+            }
+            if (paidHygiene.value == 'true') {
+              paidHygiene.checked=true;
+              paidHygiene.removeAttribute("value");
+            }
+          });
+        </script>
         <br>
 
         <p id="subt">Hygene Products</p>
         <div id="hygene">
-          Free: <input type="checkbox" id="freeHygiene">
-          Paid: <input type="checkbox" id="paidHygiene">
+          Free: <input type="checkbox" id="freeHygiene" value="{{settings.free}}">
+          Paid: <input type="checkbox" id="paidHygiene" value="{{settings.paid}}">
         </div>
 
         <br>
         
         <div id="rating">
           <p id="subt">Rating: <span id="sliderRate_val"></span></p>
-          <input type="range" min="1" max="5" value="5" id="sliderRate_distance" list="steplistRate" >
+          <input type="range" min="1" max="5" value="{{settings.rating}}" id="sliderRate_distance" list="steplistRate" >
           <datalist id="steplistRate">
             <option>0</option>
             <option>1</option>
