@@ -80,8 +80,19 @@
       function buttonClicked()
       {
         var form = document.createElement('form');
-        form.innerHTML = '<input type= "filter"'+' men = "'+men.checked+ '" women = "' + women.checked + '" inclusive = "' +inclusive.checked +'" freeHygiene="' + freeHygiene.checked + '" paidHygiene="' + paidHygiene.checked +'" Distance="' +slider.value+'" Rating="'+ sliderRate.value+'" >';
-        console.log(form); 
+        form.action = "{% url 'main' %}";
+        form.method = "post";
+        form.innerHTML = '{% csrf_token %}\n<input type="text" value="filter" name="type">\n';
+        form.innerHTML += '<input type="text" name = "m" value='+men.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "w" value='+women.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "i" value='+inclusive.checked+'>\n';
+        form.innerHTML += '<input type="text" name ="free" value='+freeHygiene.checked+'>\n';
+        form.innerHTML += '<input type="text" name ="paid" value='+paidHygiene.checked+'>\n';
+        form.innerHTML += '<input type="number" name="distance" value='+slider.value+'>\n';
+        form.innerHTML += '<input type="number" name="rating" value=' + sliderRate.value+'>\n';
+        console.log(form);
+        document.body.appendChild(form);
+        form.submit();
       }
       
     </script>
