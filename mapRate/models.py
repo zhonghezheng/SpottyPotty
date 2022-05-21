@@ -17,7 +17,7 @@ class Bathroom(models.Model):
     longitude = models.FloatField()
 
     def __str__(self):
-        return f"{self.name}: ({self.latitude}, {self.longitude}), {self.rating}*"
+        return f"{self.name}: ({self.latitude}, {self.longitude})*"
 
     def cAvg(self):
         return self.cleanlinessTotal/self.cleanlinessNo
