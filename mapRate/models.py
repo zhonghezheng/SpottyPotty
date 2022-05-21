@@ -18,9 +18,7 @@ class Rating(models.Model):
 # Create your models here.
 class Bathroom(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
-    genders = models.CharField(max_length=1)
-    latitude = models.FloatField()
-    longitude = models.FloatField()    
+    genders = models.CharField(max_length=1) 
     periodProducts = models.BooleanField()
 
     cleanliness = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="c")
@@ -45,14 +43,15 @@ class Bathroom(models.Model):
 
 
     def __str__(self):
-        return f"{self.name}: ({self.latitude}, {self.longitude})*"
+        return f"{self.name}"
 
-# class Pin(models.Model):
-#     bathroom_male = models.ForeignKey(Bathroom, on_delete=models.CASCADE)
-#     bathroom_female = models.ForeignKey(Bathroom, on_delete=models.CASCADE)
-#     bathroom_inclusive = models.ForeignKey(Bathroom, on_delete=models.CASCADE)
-
-#     def __str__(self):
-#         return f"male: {str(self.bathroom_male)} \n\
-#                  female:{str(self.bathroom_female)}\n\
-#                  inclusive:{str(self.bathroom_inclusive)}\n"
+class Pin(models.Model):
+    bathroom_male = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="m", blank=True, null=True)
+    bathroom_female = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="f", blank=True, null=True)
+    bathroom_inclusive = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="i", blank=True, null=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()   
+    def __str__(self):
+        return f"male: {str(self.bathroom_male)},\
+                 female:{str(self.bathroom_female)},\
+                 inclusive:{str(self.bathroom_inclusive)}"

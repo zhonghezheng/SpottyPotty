@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms
-from .models import Bathroom
+from .models import Bathroom, Pin
 
 # Create your views here.
 
@@ -26,4 +26,4 @@ def main(request):
             b.periodProducts=True
         b.save()
             
-    return render(request, "mapRate/FrontEnd.html", {"bathrooms": Bathroom.objects.all()})
+    return render(request, "mapRate/FrontEnd.html", {"pins": Pin.objects.all()})
