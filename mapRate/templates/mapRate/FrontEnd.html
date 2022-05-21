@@ -322,15 +322,13 @@
           load_display("");
         }
       }
-
-      function innerDivRate(b, )
     </script>
     
     <ul>
       {% for pin in pins %}
         <script>
           popup = '<center><b>{{pin.name}}</b></center>';
-          popup += '<p style="font-size:1px" <br></p>';
+          popup += '<p style="font-size:1px"> <br></p>';
           if ('{{pin.bathroom_male.avg}}' != 0)
           {
             popup += "Men's Bathroom: {{pin.bathroom_male.avg}} stars<br>";
@@ -343,9 +341,9 @@
           {
             popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}} stars<br>";
           }
-          popup += `<p style="font-size:${8}px" <br></p>
-          <div><button class="ratebutton" onclick="openRating(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">rate</button>
-          <button class="button" onclick="OpenModal(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">info</button><br></div>`;
+          popup += '<p style="font-size:${8}px"> <br></p>';
+          popup += '<div><button class="ratebutton" onclick="openRating(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">rate</button>';
+          popup += '<button class="button" onclick="OpenModal(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">info</button><br></div>';
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
           {alt: '{{pin.name}}', title: '{{pin.name}}'}).addTo(map)
