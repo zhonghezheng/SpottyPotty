@@ -111,15 +111,5 @@
         </script>
       {% endfor %}
     </ul>
-      <!-- {% for bathroom in bathrooms %}
-        <script>
-          var string = '<a style="float:center"><b>{{bathroom.name}}</b></a>';
-          string += '<br>Quality rating: {{bathroom.cleanlinessNo}}<br>';
-          string += '<button style="float:right" onclick=OpenModal()">more</button><br>';
-          var pin = L.marker(['{{bathroom.latitude}}', '{{bathroom.longitude}}'],
-          {alt: '{{bathroom.name}}', title: '{{bathroom.name}}'}).addTo(map)
-          .bindPopup(string);
-        </script>
-      {% endfor %} -->
   </body>
 </html>
