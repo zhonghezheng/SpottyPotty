@@ -49,6 +49,10 @@
           2 Star: <input type="checkbox" id="rate2">
           1 Star: <input type="checkbox" id="rate1">
         </div>
+
+        <br>
+        <button id="EnterBtn" onclick="buttonClicked()">Enter</button>
+
     </div>
 
     <script>
@@ -70,7 +74,19 @@
       {
         output.innegitrHTML = this.value;
       }
+
+      function buttonClicked ()
+      {
+        
+      }
+      
     </script>
+
+    <form action="{% url 'main' %}" method="post" >
+      {% csrf_token %}
+      <input type="filter" men='{document.getElementById("men")}' >
+    </form>
+
 
 
     <div id="map"></div>
