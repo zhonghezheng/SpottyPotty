@@ -168,13 +168,20 @@
     <ul>
       {% for pin in pins %}
         <script>
-          // TODO: change garbage name string
-          var name = "hello"; // should be in the format {{pin.name}}
-          // WE NEED THE AVERAGES OF ALL BATHROOMS IN LOCATION
-          var average = 4; // should be in the format {{pin.average}}
 
-          var popup = '<center><b>Donald Bren Hall</b></center>';
-          popup += 'Rating: 4.23<br>'; // CONSIDER CHANGING THIS TO VISUAL STARS
+          var popup = '<center><b>{{pin.name}}</b></center>';
+          if ('{{pin.bathroom_male.avg}}' != 0)
+          {
+            popup += "Men's Bathroom: {{pin.bathroom_male.avg}}<br>"
+          }
+          if ('{{pin.bathroom_female.avg}}' != 0)
+          {
+            popup += "Women's Bathroom: {{pin.bathroom_female.avg}}<br>"
+          }
+          if ('{{pin.bathroom_inclusive.avg}}' != 0)
+          {
+            popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}}<br>"
+          }
           popup += '<button style="float:right" onclick="OpenModal({{pin.latitude}})">more</button><br>'
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
