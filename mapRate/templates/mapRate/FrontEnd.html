@@ -87,14 +87,39 @@
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
-    </script>
+    function OpenModal() {
+      let element = document.getElementById('overlay')
+      element.style.display = 'block'
+    }
+    function CloseModal() {
+      let element = document.getElementById('overlay')
+      element.style.display = 'none'
+    }
 
-      <ul>
-        {% for pin in pins %}
-          <script>
-            var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}']).addTo(map);
-          </script>
-        {% endfor %}
-      </ul>
+    </script>
+    <div class="overlay">
+      <div class="popup">
+        <div onclick="CloseModal()">&#10006;</div> <!-- Shows Close Icon -->
+        <h3>Popup Content</h3>
+      </div>
+    </div>
+    
+    <ul>
+      {% for pin in pins %}
+        <script>
+          var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}']).addTo(map);
+        </script>
+      {% endfor %}
+    </ul>
+      <!-- {% for bathroom in bathrooms %}
+        <script>
+          var string = '<a style="float:center"><b>{{bathroom.name}}</b></a>';
+          string += '<br>Quality rating: {{bathroom.cleanlinessNo}}<br>';
+          string += '<button style="float:right" onclick=OpenModal()">more</button><br>';
+          var pin = L.marker(['{{bathroom.latitude}}', '{{bathroom.longitude}}'],
+          {alt: '{{bathroom.name}}', title: '{{bathroom.name}}'}).addTo(map)
+          .bindPopup(string);
+        </script>
+      {% endfor %} -->
   </body>
 </html>
