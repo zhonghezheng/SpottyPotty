@@ -26,7 +26,15 @@
     border:2px solid grey;
     z-index:100000000000000000;
     }
-    
+
+#outerpopup {
+    display:flex;
+    justify-content:center;
+    width:100%;
+    z-index:100000000000000000;
+    background-color:grey;
+}
+
 #cancel{
     display:relative;
     cursor:pointer;

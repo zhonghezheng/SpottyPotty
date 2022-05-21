@@ -86,7 +86,6 @@
 
     <div id="map"></div>
 
-
     <script>
       var map = L.map('map').setView([33.646, -117.843], 17);
 
@@ -99,18 +98,20 @@
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
-
+      
       // TODO: CENTER POPUP BY DOING OUTER DIV
-      function OpenModal()
+      function OpenModal(pin)
       {
+        let outerpopup = document.getElementById("outerpopup");
         var popup = document.createElement('div');
+        outerpopup.appendChild(popup);
         popup.className = 'popup';
         var cancel = document.createElement('div');
         cancel.className = 'cancel';
         cancel.innerHTML = 'x';
         cancel.onclick = function (e) { popup.parentNode.removeChild(popup) };
         var message = document.createElement('p');
-        message.innerHTML = "This is a test message";
+        message.innerHTML = "test message"; // TODO: PUT IN PIN INFORMATION
         popup.appendChild(message);                                    
         popup.appendChild(cancel);
         document.body.appendChild(popup);
@@ -129,7 +130,7 @@
           var popup = '<center><b>Donald Bren Hall</b></center>';
           popup += 'Rating: 4.23<br>'; // CONSIDER CHANGING THIS TO VISUAL STARS
 
-          popup += '<button style="float:right" onclick="OpenModal()">more</button><br>'
+          popup += '<button style="float:right" onclick="OpenModal(pin)">more</button><br>'
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
           {alt: name, title: name}).addTo(map)
