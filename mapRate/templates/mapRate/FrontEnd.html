@@ -139,7 +139,7 @@
       }).addTo(map);
 
       var clicked = false;
-      function OpenModal(m, f, i)
+      function OpenModal(bname, m, f, i)
       {
         console.log(m, f, i);
         if (!clicked) {
@@ -156,7 +156,7 @@
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
-          message.innerHTML = '<h1> &nbsp'+name+'</h1>\n&nbsp'
+          message.innerHTML = '<h1> &nbsp'+bname+'</h1>\n&nbsp'
           if (m != 'None'){
             message.innerHTML += '<button id="mbuttonmore"> Male </button>';
           }
@@ -243,7 +243,7 @@
           {
             popup += "Inclusive Bathroom: {{pin.bathroom_inclusive.avg}}<br>";
           }
-          popup += '<p style="font-size:8px" <br></p><button class="button" onclick="OpenModal({{pin.latitude}})">more</button><br>';
+          popup += '<p style="font-size:8px" <br></p><button class="button" onclick="OpenModal(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">more</button><br>';
 
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
           {alt: name, title: name, className: 'click_pin'}).addTo(map)
