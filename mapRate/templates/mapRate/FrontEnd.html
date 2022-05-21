@@ -153,10 +153,16 @@
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
-          message.innerHTML = '<h1> &nbsp'+name+'</h1>\n'
-          message.innerHTML += '&nbsp <button> Male </button> <button> Female </button> <button> Gender Inclusive </button>'
-          message.id = "popupmessage"
-          console.log(message);
+          message.innerHTML = '<h1> &nbsp'+name+'</h1>\n&nbsp'
+          if (m != 'None'){
+            message.innerHTML += '<button id="mbuttonmore"> Male </button>'
+          }
+          if (f != 'None'){
+            message.innerHTML += '<button id="fbuttonmore"> Female </button>'
+          }
+          if (i != 'None'){
+            message.innerHTML += '<button id="ibuttonmore"> Gender Inclusive </button>'
+          } 
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
