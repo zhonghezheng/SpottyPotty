@@ -13,20 +13,45 @@
   </head>
 
   <body>
-     <div id="map"></div>
 
-     <script>
-        var map = L.map('map').setView([33.646, -117.843], 17);
+    <div id="sidemap">
+      <h2> Filter </h2>
+        <p>Gender</p>
+        <div id="gender">
+          Men: <input type="checkbox" id="men">
+          Women: <input type="checkbox" id="women">
+          Gender Neutral: <input type="checkbox" id="genderNeutral">
 
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          maxZoom: 19,
-          minZoom: 17,
-          id: 'mapbox/streets-v11',
-          tileSize: 512,
-          zoomOffset: -1,
-          accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
+          <script>
+            var men = document.getElementById("men");
+            var women = document.getElementById("women");
+            var genderNeutral = document.getElementById("genderNeutral");
+          </script>
+        </div>
+        <p>Distance</p>
+        <div id="distance"></div>
+        <p>Hygene Products</p>
+        <div id="hygene"></div>
+        <p>Rating</p>
+        <div id="rating"></div>
+    </div>
+
+
+    <div id="map"></div>
+
+    <script>
+      var map = L.map('map').setView([33.646, -117.843], 17);
+
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 19,
+        minZoom: 17,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
     </script>
+    
   </body>
 </html>
