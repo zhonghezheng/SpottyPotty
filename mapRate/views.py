@@ -5,6 +5,16 @@ from .models import Bathroom, Pin
 
 # Create your views here.
 
+def products_filter(bathroom, free, paid):
+    if not free and not paid:
+        return True
+    if not free and paid:
+        return bathroom.paidPeriodProducts
+    if free and not paid:
+        return bathroom.freePeriodProducts
+    if free and paid:
+        return bathroom.paidPeriodProducts or bathroom.freePeriodProducts
+
 def filter_dict(pins, r):
     for k in r:
         r[k] = r[k][0]
@@ -22,8 +32,7 @@ def filter_dict(pins, r):
         if r["i"] == "true" and pin.bathroom_inclusive is not None:
             candidates.append(pin.bathroom_inclusive)
         candidates = list(filter(lambda b: b.avg >= float(r["rating"]), candidates))
-        candidates = list(filter(lambda b: r["paid"] == "false" or (r["paid"] == "true" and b.paidPeriodProducts), candidates))
-        candidates = list(filter(lambda b: r["free"] == "false" or (r["free"] == "true" and b.freePeriodProducts), candidates))
+        candidates = list(filter(lambda b: products_filter(b, r["free"] == "true", r["paid"] == "true"), candidates))
         if len(candidates) > 0:
             filtered.append(pin)
     return filtered
