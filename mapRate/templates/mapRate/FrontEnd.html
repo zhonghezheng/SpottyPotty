@@ -139,29 +139,27 @@
       }).addTo(map);
 
       var clicked = false;
-      function OpenModal(pin)
+      function OpenModal(m, f, i)
       {
-        console.log(pin);
+        console.log(m, f, i);
         if (!clicked) {
           clicked = true;
           var outerpopup = document.createElement('div');
           outerpopup.className = 'outerpopup';
-          console.log(outerpopup);
-         // var popup = document.createElement('div');
           
-          //outerpopup.appendChild(popup);
-          //popup.className = 'popup';
           var cancel = document.createElement('div');
           cancel.className = 'cancel';
           cancel.innerHTML = '✖';
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
-          message.innerHTML = 'Hello' +pin; // TODO: PUT IN PIN INFORMATION
+          message.innerHTML = '<h1> &nbsp'+name+'</h1>\n'
+          message.innerHTML += '&nbsp <button> Male </button> <button> Female </button> <button> Gender Inclusive </button>'
+          message.id = "popupmessage"
+          console.log(message);
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
-          console.log(outerpopup);
         }
       }
     </script>
@@ -170,14 +168,13 @@
       {% for pin in pins %}
         <script>
           // TODO: change garbage name string
-          var name = "hello"; // should be in the format {{pin.name}}
+          var name = '{{pin.name}}'; // should be in the format {{pin.name}}
           // WE NEED THE AVERAGES OF ALL BATHROOMS IN LOCATION
           var average = 4; // should be in the format {{pin.average}}
 
           var popup = '<center><b>Donald Bren Hall</b></center>';
           popup += 'Rating: 4.23<br>'; // CONSIDER CHANGING THIS TO VISUAL STARS
-          popup += '<button style="float:right" onclick="OpenModal({{pin.latitude}})">more</button><br>'
-
+          popup += '<button style="float:right" onclick="OpenModal(\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">more</button><br>'
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
           {alt: name, title: name, className: 'click_pin'}).addTo(map)
           .bindPopup(popup);

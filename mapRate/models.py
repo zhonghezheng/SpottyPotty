@@ -37,7 +37,9 @@ class Bathroom(models.Model):
  
 
     def __str__(self):
-        return "bathroom"
+        ret =  str(self.gender)+","+str(self.freePeriodProducts)+","+str(self.paidPeriodProducts)+","
+        ret += str(self.cleanliness)+","+str(self.hygiene)+","+str(self.safety)+","+str(self.accessiblity)+","+str(self.avg)
+        return ret
 
 class Pin(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
