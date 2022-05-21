@@ -5,8 +5,13 @@ from .models import Bathroom, Pin
 
 # Create your views here.
 
-def main(request):
+def filter(pins, r):
+    filtered = []
+    # do stuff
+    return filtered
 
+def main(request):
+    defaultPins = Pin.objects.all()
     if (request.method == "POST"):
         r = request.POST
         if r["type"] == "rate":
@@ -27,6 +32,31 @@ def main(request):
                 b.periodProducts=True
             b.save()
         elif r["type"] == "filter":
+            
+            pins = Pin.objects.all()
+            filtered = []
+            
+            for pin in pins:
+                if r["m"] == "true" and pin.bathroom_male is None:
+                    continue
+                if r["f"] == "true" and pin.bathroom_female is None:
+                    continue
+                if r["i"] == "true" and pin.bathroom_inclusive is None:
+                    continue
+                bathrooms = [pin.bathroom_male, pin.bathroom_female, pin.bathroom_inclusive]
+                for bathroom in bathrooms:
+                    if bathroom is None:
+                        continue
+                    if r["free"] == "true" and bathroom.
+
+
+                if r["free"] == "true" and pin
+                filtered.append(pin)
+
+            
+            # <QueryDict: {'csrfmiddlewaretoken': ['IioMdDhDrWy7Y5I04LMcVpuF89CxHiVjKi6qC7hbtyXtMiYhJ2Jrnj7dTLcp50Zw'], 'type': ['filter'], 'm': ['false'], 'w': ['false'], 'i': ['false'], 'free': ['false'], 'paid': ['false'], 'distance': ['5'], 'rating': ['5']}>
+
+            defaultPins = filtered
             print(r)
             
-    return render(request, "mapRate/Frontend.html", {"pins": Pin.objects.all()})
+    return render(request, "mapRate/Frontend.html", {"pins": defaultPins})
