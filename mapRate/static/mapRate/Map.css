@@ -14,14 +14,14 @@
 
 .overlay {
     position: absolute;
-    display: none;
+    display: block;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.8);
     z-index: 2;
-  }
+}
 
 .popup {
     position: absolute;
@@ -31,7 +31,8 @@
     left: 25%;
     text-align: center;
     background: white;
-  }
+}
+
 #slider_distance {
     width: 75%;
     height: 25px;

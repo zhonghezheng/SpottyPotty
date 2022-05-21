@@ -74,7 +74,12 @@
 
 
     <div id="map"></div>
-
+    <div class="overlay">
+      <div class="popup">
+        <div onclick="CloseModal()">&#10006;</div> <!-- Shows Close Icon -->
+        <h3>Popup Content</h3>
+      </div>
+    </div>
     <script>
       var map = L.map('map').setView([33.646, -117.843], 17);
 
@@ -88,26 +93,32 @@
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
     function OpenModal() {
-      let element = document.getElementById('overlay')
-      element.style.display = 'block'
+      let element = document.getElementsByClassName('overlay')
+      console.log(element)
+      element[0].div.display = "block"
     }
     function CloseModal() {
       let element = document.getElementById('overlay')
-      element.style.display = 'none'
+      element.display = 'none'
     }
-
     </script>
-    <div class="overlay">
-      <div class="popup">
-        <div onclick="CloseModal()">&#10006;</div> <!-- Shows Close Icon -->
-        <h3>Popup Content</h3>
-      </div>
-    </div>
     
     <ul>
       {% for pin in pins %}
         <script>
-          var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}']).addTo(map);
+          // TODO: change garbage name string
+          var name = "hello"; // should be in the format {{pin.name}}
+          // WE NEED THE AVERAGES OF ALL BATHROOMS IN LOCATION
+          var average = 4; // should be in the format {{pin.average}}
+
+          var popup = '<center><b>Donald Bren Hall</b></center>';
+          popup += 'Rating: 4.23<br>'; // CONSIDER CHANGING THIS TO VISUAL STARS
+
+          popup += '<button style="float:right" onclick="OpenModal()">more</button><br>'
+
+          var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
+          {alt: name, title: name}).addTo(map)
+          .bindPopup(popup);
         </script>
       {% endfor %}
     </ul>
