@@ -6,8 +6,24 @@ from .models import Bathroom, Pin
 # Create your views here.
 
 def filter(pins, r):
+    if r['m'] == "false" and r['f'] == "false" and r['i'] == "false":
+        r['m'] = "true"
+        r['f'] = "true"
+        r['i'] = "true"
     filtered = []
-    # do stuff
+    for pin in pins:
+        candidates = []
+        if r['m'] == "true" and pin.bathroom_male is not None:
+            candidates.append(pin.bathroom_male)
+        if r['f'] == "true" and pin.bathroom_female is not None:
+            candidates.append(pin.bathroom_female)
+        if r['i'] == "true" and pin.bathroom_inclusive is not None:
+            candidates.append(pin.bathroom_inclusive)
+        candidates = filter(lambda b: b.avg >= float(r["rating"]), candidates)
+        candidates = filter(lambda b: r["paid"] == "false" or (r["paid"] == "true" and b.paidPeriodProducts), candidates)
+        candidates = filter(lambda b: r["free"] == "false" or (r["free"] == "true" and b.freePeriodProducts), candidates)
+        if len(candidates) > 0:
+            filtered.append(pin)
     return filtered
 
 def main(request):
@@ -32,31 +48,6 @@ def main(request):
                 b.periodProducts=True
             b.save()
         elif r["type"] == "filter":
-            
-            pins = Pin.objects.all()
-            filtered = []
-            
-            for pin in pins:
-                if r["m"] == "true" and pin.bathroom_male is None:
-                    continue
-                if r["f"] == "true" and pin.bathroom_female is None:
-                    continue
-                if r["i"] == "true" and pin.bathroom_inclusive is None:
-                    continue
-                bathrooms = [pin.bathroom_male, pin.bathroom_female, pin.bathroom_inclusive]
-                for bathroom in bathrooms:
-                    if bathroom is None:
-                        continue
-                    if r["free"] == "true" and bathroom.
-
-
-                if r["free"] == "true" and pin
-                filtered.append(pin)
-
-            
-            # <QueryDict: {'csrfmiddlewaretoken': ['IioMdDhDrWy7Y5I04LMcVpuF89CxHiVjKi6qC7hbtyXtMiYhJ2Jrnj7dTLcp50Zw'], 'type': ['filter'], 'm': ['false'], 'w': ['false'], 'i': ['false'], 'free': ['false'], 'paid': ['false'], 'distance': ['5'], 'rating': ['5']}>
-
-            defaultPins = filtered
-            print(r)
+            defaultPins = filter(defaultPins, r)
             
     return render(request, "mapRate/Frontend.html", {"pins": defaultPins})

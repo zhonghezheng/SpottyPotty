@@ -17,10 +17,10 @@ class Rating(models.Model):
 
 # Create your models here.
 class Bathroom(models.Model):
-    name = models.CharField(max_length=255, primary_key=True)
-    genders = models.CharField(max_length=1) 
-    periodProducts = models.BooleanField()
-    # TODO: TALK ABOUT HOW TO IMPLEMENT DIFFERENT BOOLS FOR PERIOD PRODUCTS
+    name = models.CharField(max_length=255)
+    gender = models.CharField(max_length=1) 
+    freePeriodProducts = models.BooleanField()
+    paidPeriodProducts = models.BooleanField()
 
     cleanliness = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="c")
     hygiene = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="h")
