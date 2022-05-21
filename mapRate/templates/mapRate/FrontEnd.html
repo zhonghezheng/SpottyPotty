@@ -6,9 +6,12 @@
 
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-    crossorigin=""></script>
+    crossorigin="">
+    </script>
 
     <link rel="stylesheet" href="../../static/mapRate/Map.css">
+
+
 
   </head>
 
@@ -114,6 +117,23 @@
         form.innerHTML += '<input type="text" name ="paid" value='+paidHygiene.checked+'>\n';
         form.innerHTML += '<input type="number" name="distance" value='+slider.value+'>\n';
         form.innerHTML += '<input type="number" name="rating" value=' + sliderRate.value+'>\n';
+        
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        }
+
+        function showPosition(position) {
+          form.innerHTML += '<input type="number" name="longitude" value=' + position.coords.longitude+'>\n'; 
+          form.innerHTML += '<input type="number" name="latitude" value=' + position.coords.latitude+'>\n';
+
+          var circle = L.circle([position.coords.latitude, position.coords.longitude], {
+                color: 'blue',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 10
+            }).addTo(map)
+        }
+
         console.log(form);
         document.body.appendChild(form);
         form.submit();
@@ -138,6 +158,16 @@
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
+
+      /*location tracking*/
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
 
       var clicked = false;
       function OpenModal(pin)
