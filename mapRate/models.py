@@ -1,10 +1,10 @@
 from django.db import models
 
 class Rating(models.Model):
+    name = models.CharField(max_length=255, primary_key=True)
     total = models.IntegerField(default=0)
     count = models.IntegerField(default=0)
     average = models.FloatField(default=0.0)
-    name = models.CharField(max_length=255, primary_key=True)
     
     def update_avg(self):
         if self.count == 0:
