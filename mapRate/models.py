@@ -17,7 +17,7 @@ class Rating(models.Model):
 
 # Create your models here.
 class Bathroom(models.Model):
-    name = models.CharField(max_length=255, primary_key=True)
+    name = models.CharField(max_length=255)
     gender = models.CharField(max_length=1) 
     freePeriodProducts = models.BooleanField()
     paidPeriodProducts = models.BooleanField()
@@ -34,20 +34,13 @@ class Bathroom(models.Model):
         self.safety.update_avg()
         self.accessiblity.update_avg()
         self.avg = (self.cleanliness.average+self.hygiene.average+self.safety.average+self.accessibility.average)/4
-    # cleanlinessTotal = models.FloatField()
-    # cleanlinessNo = models.IntegerField(default=0)
-    # hygieneProductsTotal = models.FloatField()
-    # hygieneProductsNo = models.IntegerField(default=0)
-    # accessibilityTotal = models.FloatField()
-    # accessibilityNo = models.IntegerField(default=0)
-    # safetyTotal = models.FloatField()
-    # safetyNo = models.IntegerField(default=0)
-
+ 
 
     def __str__(self):
-        return f"{self.name}"
+        return "bathroom"
 
 class Pin(models.Model):
+    name = models.CharField(max_length=255, primary_key=True)
     bathroom_male = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="m", blank=True, null=True)
     bathroom_female = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="f", blank=True, null=True)
     bathroom_inclusive = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="i", blank=True, null=True)
