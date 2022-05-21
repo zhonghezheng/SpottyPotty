@@ -15,16 +15,17 @@
 
 .popup{
     position:absolute;
+    border-radius:10px;
     display:relative;
     justify-content:center;
     margin:100px auto;
     width:200px;
-    height:150px;
-    font-family:verdana;
+    height:200px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size:13px;
     padding:10px;
-    background-color:rgb(240,240,240);
-    border:2px solid grey;
+    background-color:#dcd9d6;
+    border:2px solid:#f0e7bc;
     z-index:100000000000000000;
     vertical-align:middle;
     align-items:center;
