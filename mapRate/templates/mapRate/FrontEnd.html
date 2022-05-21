@@ -52,6 +52,13 @@
         accessToken: 'pk.eyJ1IjoiY2F0aGVyaW5lMTAzMDEiLCJhIjoiY2wzZmY1OGp6MDU2NDNjbHE5dHRld2U4cSJ9.vtDWqK9r4idKKgr9thStKQ'
       }).addTo(map);
     </script>
-    
+
+      <ul>
+        {% for bathroom in bathrooms %}
+          <script>
+            var pin = L.marker(['{{bathroom.latitude}}', '{{bathroom.longitude}}']).addTo(map);
+          </script>
+        {% endfor %}
+      </ul>
   </body>
 </html>
