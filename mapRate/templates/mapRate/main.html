@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bathroom Map</title>
+        <link rel="stylesheet" href="{% static 'mapRate/styles.css' %}">
+        <script src="{% static 'mapRate/menu.js' %}"></script>
+    </head>
+    <body>
+        <button id="bMap">Map</button>
+        <button id="aMap">Add</button>
+        <button id="rMap">Rate</button>
+        <div id = "map">
+            Bathrooms:
+            <ul>
+                {% for bathroom in bathrooms %}
+                    <li>Bathroom {{bathroom}} {{bathroom.id}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id = "add">
+            <form action="{% url 'main' %}" method="post" >
+                {% csrf_token %}
+                <input type="hidden" value = "add" name="type">
+                <input type="text" name = "name" value="" placeholder = "Name">
+                <input type="number" step="0.001" name = "lat" placeholder = "Latitude">
+                <input type = "number" step="0.001" name = "lon" placeholder = "Longitude">
+                <input type = "number" step="1" min = "1" max = "5" name = "rating" placeholder = "Rating">
+                <input type="submit" id = "submit_add" value="Add">
+            </form>
+        </div>
+        <div id = "rate">
+            Rate
+            <form action="{% url 'main' %}" method="post" >
+                {% csrf_token %}
+                <input type="hidden" value = "rate" name="type">
+                <input type="number" step="1" min = "1" max = "5" name = "rating" placeholder = "Rating">
+                <input type="number" step="1" name="id" placeholder = "ID">
+                <input type="submit" id = "submit_add" value="Rate">
+            </form>
+        </div>
+    </body>
+</html>
+
