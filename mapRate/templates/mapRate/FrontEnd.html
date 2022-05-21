@@ -52,6 +52,7 @@
         </div>
 
         <br>
+        <br>
 
         <p id="subt">Hygiene Products</p>
         <div id="hygene">
@@ -60,6 +61,7 @@
           <input type="checkbox" id="paidHygiene"> Paid
         </div>
 
+        <br>
         <br>
         
         <div id="rating">
@@ -248,7 +250,7 @@
       }
       function giveInnerDiv(b, id){
           bArray = b.split(",");
-          divToAdd = '<div id = "'+id+'"><br/>&nbspGender: ' + bArray[0] + '<br/>';
+          divToAdd = '<div class="bathinfo" id = "'+id+'"><br/>&nbspGender: ' + bArray[0] + '<br/>';
           if (bArray[1] == "True"){
             divToAdd += '&nbspFree Period Products: Available <br/>';
           }
