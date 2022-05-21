@@ -25,13 +25,14 @@ class Bathroom(models.Model):
     hygiene = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="h")
     safety = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="s")
     accessiblity = models.ForeignKey(Rating, on_delete=models.PROTECT, related_name="a")
+    avg = models.FloatField(default=0)
 
     def update(self):
         self.cleanliness.update_avg()
         self.hygiene.update_avg()
         self.safety.update_avg()
         self.accessiblity.update_avg()
-    
+        self.avg = (self.cleanliness.average+self.hygiene.average+self.safety.average+self.accessibility.average)/4
     # cleanlinessTotal = models.FloatField()
     # cleanlinessNo = models.IntegerField(default=0)
     # hygieneProductsTotal = models.FloatField()
@@ -51,6 +52,7 @@ class Pin(models.Model):
     bathroom_inclusive = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name="i", blank=True, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()   
+
     def __str__(self):
         return f"male: {str(self.bathroom_male)},\
                  female:{str(self.bathroom_female)},\
