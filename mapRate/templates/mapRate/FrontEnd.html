@@ -140,28 +140,33 @@
       }).addTo(map);
 
       var clicked = false;
-      function OpenModal(pin)
+      function OpenModal(m, f, i)
       {
-        console.log(pin);
+        console.log(m, f, i);
         if (!clicked) {
           clicked = true;
           var outerpopup = document.createElement('div');
           outerpopup.className = 'outerpopup';
-          console.log(outerpopup);
-          var popup = document.createElement('div');
-          outerpopup.appendChild(popup);
-          popup.className = 'popup';
+          
           var cancel = document.createElement('div');
           cancel.className = 'cancel';
           cancel.innerHTML = '✖';
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
-          message.innerHTML = 'Hello' +pin; // TODO: PUT IN PIN INFORMATION
-          popup.appendChild(cancel);
-          popup.appendChild(message);
+          message.innerHTML = '<h1> &nbsp'+name+'</h1>\n&nbsp'
+          if (m != 'None'){
+            message.innerHTML += '<button id="mbuttonmore"> Male </button>'
+          }
+          if (f != 'None'){
+            message.innerHTML += '<button id="fbuttonmore"> Female </button>'
+          }
+          if (i != 'None'){
+            message.innerHTML += '<button id="ibuttonmore"> Gender Inclusive </button>'
+          } 
+          outerpopup.appendChild(cancel);
+          outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
-          console.log(popup);
         }
       }
     </script>
@@ -169,7 +174,6 @@
     <ul>
       {% for pin in pins %}
         <script>
-
           popup = '<center><b>{{pin.name}}</b></center>';
           popup += '<p style="font-size:1px" <br></p>';
           if ('{{pin.bathroom_male.avg}}' != 0)
