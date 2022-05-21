@@ -14,7 +14,7 @@
             Bathrooms:
             <ul>
                 {% for bathroom in bathrooms %}
-                    <li>Bathroom {{bathroom}} {{bathroom.id}}</li>
+                    <li>Bathroom {{bathroom}} {{bathroom.cAvg()}}</li>
                 {% endfor %}
             </ul>
         </div>
