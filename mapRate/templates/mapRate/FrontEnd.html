@@ -90,9 +90,9 @@
     </script>
 
       <ul>
-        {% for bathroom in bathrooms %}
+        {% for pin in pins %}
           <script>
-            var pin = L.marker(['{{bathroom.latitude}}', '{{bathroom.longitude}}']).addTo(map);
+            var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}']).addTo(map);
           </script>
         {% endfor %}
       </ul>
