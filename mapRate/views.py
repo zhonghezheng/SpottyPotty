@@ -27,4 +27,4 @@ def main(request):
             b.periodProducts=True
         b.save()
             
-    return render(request, "mapRate/main.html", {"bathrooms": Bathroom.objects.all()})
+    return render(request, "mapRate/FrontEnd.html", {"bathrooms": Bathroom.objects.all()})
