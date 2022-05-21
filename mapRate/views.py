@@ -5,26 +5,25 @@ from .models import Bathroom
 
 # Create your views here.
 
-
 def main(request):
 
     if (request.method == "POST"):
         b = Bathroom.objects.get(name="name")
         r = request.POST
         if r["cleanliness"] != "":
-            b.cleanlinessTotal+=int(r["cleanliness"])
-            b.cleanlinessNo+=1
+            b.cleanliness.total += int(r["cleanliness"])
+            b.cleanliness.count += 1
         if r["hygiene"] != "":
-            b.hygieneProductsTotal+=int(r["hygiene"])
-            b.hygieneProductsNo+=1
+            b.hygiene.total += int(r["cleanliness"])
+            b.hygiene.count += 1
         if r["accessibility"] != "":
-            b.accessibilityTotal+=int(r["accessibility"])
-            b.accessibilityNo+=1
+            b.accessibility.total += int(r["cleanliness"])
+            b.accessibility.count += 1
         if r["safety"] != "":
-            b.safetyTotal+=int(r["safety"])
-            b.safetyNo+=1
+            b.safety.total += int(r["cleanliness"])
+            b.safety.count += 1
         if r["periodProd"] != "":
             b.periodProducts=True
         b.save()
             
-    return render(request, "mapRate/FrontEnd.html", {"bathrooms": Bathroom.objects.all()})
+    return render(request, "mapRate/main.html", {"bathrooms": Bathroom.objects.all()})
