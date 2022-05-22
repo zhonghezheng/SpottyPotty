@@ -298,7 +298,7 @@
           return divToAdd;
       }
 
-      function sendRating()
+      function sendRating(cur_name)
       {
         
         var form = document.createElement('form');
@@ -356,7 +356,8 @@
         form.innerHTML += '<input type="text" name = "safety" value='+sliderSafety.checked+'>\n';
         form.innerHTML += '<input type="text" name = "free" value='+freeRate.checked+'>\n';
         form.innerHTML += '<input type="text" name = "paid" value='+paidRate.checked+'>\n';
-
+        form.innerHTML += '<input type="text" name = "name" value="'+cur_name+'">\n';
+ 
         if (selectedGender.innerHTML == "Men")
         {
           form.innerHTML += '<input type="text" name = "gender" value=M>\n';
@@ -370,13 +371,16 @@
         {
           form.innerHTML += '<input type="text" name = "gender" value=I>\n';
         }
+        else {
+          form.innerHTML += '<input type="text" name = "gender" value=M>\n';
+        }
           
         console.log(form);
         document.body.appendChild(form);
         form.submit();
       }
     
-      function openRating() 
+      function openRating(name, m, f, i) 
       {
         if (!clicked) {
           clicked = true;
@@ -461,10 +465,10 @@
               `<p id="subt2">Paid Products: <input type="checkbox" id="paidRate" value="0"></p>
             </datalist>`;
 
-            x.innerHTML +=
-            `<br><button id="EnterBtn" onclick="sendRating()">Enter</button>`;
-
+            x.innerHTML +=`<br><button id="EnterBtn2">Enter</button>`;
             outerpopup.appendChild(x);
+            console.log(name);
+            document.getElementById("EnterBtn2").addEventListener('click', () => sendRating(name));
             console.log(x);
 
             var sliderClean = document.getElementById("slider_Clean");

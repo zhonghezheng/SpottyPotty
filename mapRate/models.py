@@ -36,7 +36,7 @@ class Bathroom(models.Model):
         self.safety.update_avg()
         self.accessiblity.update_avg()
         self.avg = round((self.cleanliness.average+self.hygiene.average+self.safety.average+self.accessiblity.average)/4, 1)
- 
+        self.save()
 
     def __str__(self):
         ret =  str(self.gender)+","+str(self.freePeriodProducts)+","+str(self.paidPeriodProducts)+","

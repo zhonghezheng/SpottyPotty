@@ -69,7 +69,8 @@ def main(request):
     if (request.method == "POST"):
         r = request.POST
         if r["type"] == "rate":
-            p = Pin.objects.get(name="name")
+            print(r["name"])
+            p = Pin.objects.get(name=r["name"])
             b = p.bathroom_male
             if r['gender']=="M":
                 b = p.bathroom_male
@@ -77,6 +78,7 @@ def main(request):
                 b = p.bathroom_female
             elif r['gender'] == "I":
                 b = p.bathroom_inclusive
+            print(b)
             
             if r["cleanliness"] != "":
                 b.cleanliness.total += int(r["cleanliness"])
@@ -85,15 +87,21 @@ def main(request):
                 b.hygiene.total += int(r["cleanliness"])
                 b.hygiene.count += 1
             if r["accessibility"] != "":
-                b.accessibility.total += int(r["cleanliness"])
-                b.accessibility.count += 1
+                b.accessiblity.total += int(r["cleanliness"])
+                b.accessiblity.count += 1
             if r["safety"] != "":
                 b.safety.total += int(r["cleanliness"])
                 b.safety.count += 1
-            if r["free"] != "":
-                b.freeperiodProducts=True
-            if r["paid"] !="":
-                b.paidperiodProducts=True
+            if r["free"] != "false":
+                print(r["free"])
+                b.freePeriodProducts=True
+            else:
+                b.freePeriodProducts=False
+            if r["paid"] !="false":
+                b.paidPeriodProducts=True
+            else:
+                b.paidPeriodProducts=False
+            b.update()
             b.save()
         elif r["type"] == "filter":
             defaultPins = filter_dict(defaultPins, dict(r))
