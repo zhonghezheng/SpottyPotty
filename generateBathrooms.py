@@ -75,7 +75,7 @@ for b in bathrooms:
         p = Pin(name=b[0], bathroom_male=bathroomT[0], bathroom_female=bathroomT[1], latitude = b[1], longitude=b[2])
         p.save()
 
-def pseduoRate(name):
+def pseudoRate(name):
     p = Pin.objects.get(name=name)
     for b in [p.bathroom_male, p.bathroom_female, p.bathroom_inclusive]:
         if b is not None:
@@ -94,5 +94,5 @@ def pseduoRate(name):
 
 for n in names:
     for i in range(0, random.randint(10, 20)):
-        pseduoRate(n)
+        pseudoRate(n)
 
