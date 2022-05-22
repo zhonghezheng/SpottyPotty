@@ -7,6 +7,7 @@ from .models import Bathroom, Pin
 
 # returns distance in miles
 def distance(lat1, lon1, lat2, lon2):
+    print('here')
     dx = lon1 * 69 - lon2 * 69
     dy = lat1 * 69 - lon2 * 69
     return (dx ** 2 + dy ** 2) ** 0.5
@@ -68,8 +69,7 @@ def main(request):
     defaultSettings = {"m": "false", "f": "false", "i": "false", "distance": "0.3", "free": "false", "paid": "false", "rating": 1}
     if (request.method == "POST"):
         r = request.POST
-        print(r["latitude"])
-        print(r["longitude"])
+        print(r.dict())
         if r["type"] == "rate":
             b = Bathroom.objects.get(name="name")
             if r["cleanliness"] != "":
