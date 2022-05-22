@@ -65,6 +65,10 @@
     margin-right:5px;
 }
 
+.center {
+    text-align:center;
+}
+
 .button {
     cursor:pointer;
     background-color:var(--lightblue);
