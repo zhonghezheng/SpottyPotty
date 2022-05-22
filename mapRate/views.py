@@ -65,7 +65,7 @@ def update_settings(r):
 
 def main(request):
     defaultPins = Pin.objects.all()
-    defaultSettings = {"m": "false", "f": "false", "i": "false", "distance": "0.3", "free": "false", "paid": "false", "rating": 1}
+    defaultSettings = {"m": "false", "f": "false", "i": "false", "distance": "1.0", "free": "false", "paid": "false", "rating": 1}
     if (request.method == "POST"):
         r = request.POST
         if r["type"] == "rate":
