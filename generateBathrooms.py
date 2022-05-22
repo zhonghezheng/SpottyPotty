@@ -22,10 +22,11 @@ bathrooms = [["Aldrich Hall", 33.64854669998156, -117.84122589999998, True],
 ["Music & Media Building", 33.64950783420398, -117.84447327667768, True],
 ["Rockwell Engr. Center", 33.64405762471028, -117.84059998862271, True],
 ["Rowland Hall", 33.64476107186335, -117.84422225978636, True],
-
-
-
-]
+["Schneiderman Lecture Hall", 33.645798537622944, -117.8447573039678, True],
+["Social & Behavioral Sciences Gateway", 33.64758536453718, -117.83906630211386, True],
+["Social Science Plaza B", 33.6472138340985, -117.83912613095008, True],
+["Steinhaus Hall", 33.64641757311412, -117.84489568862256, True],
+["Student Center", 33.64909423653421, -117.84223294730018, True]]
 rCounter = 0
 bCounter = 0
 for b in bathrooms:
