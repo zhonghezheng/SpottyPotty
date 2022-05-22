@@ -1,4 +1,5 @@
 from mapRate.models import Rating, Bathroom, Pin
+import random
 
 bathrooms = [["Aldrich Hall", 33.64854669998156, -117.84122589999998, True],
 ["Anteater Recreation Center", 33.64359764777621, -117.82791864452422, True],
@@ -59,3 +60,29 @@ for b in bathrooms:
     else: 
         p = Pin(name=b[0], bathroom_male=bathroomT[0], bathroom_female=bathroomT[1], latitude = b[1], longitude=b[2])
         p.save()
+
+def pseduoRate(name):
+    p = Pin.objects.get(name=name)
+    for b in [p.bathroom_male, p.bathroom_female, p.bathroom_inclusive]:
+        b.cleanliness.total += random.randint(1, 5)
+        b.cleanliness.count += 1
+        b.cleanliness.save()
+        b.hygiene.total += random.randint(1, 5)
+        b.hygiene.count += 1
+        b.hygiene.save()
+        b.accessiblity.total += random.randint(1, 5)
+        b.accessiblity.count += 1
+        b.accessiblity.save()
+        b.safety.total += random.randint(1, 5)
+        b.safety.count += 1
+        b.safety.save()
+        b.freeperiodProducts=bool(random.randint(0, 1))
+        b.paidperiodProducts=bool(random.randint(0, 1))
+        b.update()
+        print(name, b)
+        b.save()
+
+for n in names:
+    for i in range(0, random.randint(10, 20)):
+        pseduoRate(n)
+
