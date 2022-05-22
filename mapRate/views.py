@@ -37,7 +37,9 @@ def filter_dict(pins, r):
         print(miles)
         print(float(r["distance"]))
         if float(r["distance"]) < miles:
+            print("too far because", float(r["distance"]), "<", miles)
             continue
+        print("not too far because", float(r["distance"]), ">", miles)
 
         candidates = []
         if r["m"] == "true" and pin.bathroom_male is not None:
@@ -50,6 +52,7 @@ def filter_dict(pins, r):
         candidates = list(filter(lambda b: products_filter(b, r["free"] == "true", r["paid"] == "true"), candidates))
         if len(candidates) > 0:
             filtered.append(pin)
+    print(len(filtered))
     return filtered
 
 def update_settings(r):
