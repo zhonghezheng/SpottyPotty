@@ -25,6 +25,7 @@
 {
     margin-left: 10px;
     size: auto;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 #subt
@@ -54,8 +55,14 @@
     float:left;
 }
 
-.clear {
-    clear:both;
+.gbutton {
+    cursor:pointer;
+    background-color:var(--lightblue);
+    border-radius:5%;
+    border: 1px solid var(--blue);
+    justify-content:center;
+    float:center;
+    margin-right:5px;
 }
 
 .button {
@@ -67,12 +74,13 @@
 }
 
 .outerpopup {
+    font-family:Arial, Helvetica, sans-serif;
     position:absolute;
     display:flex;
     top: 50%;
     left: 50%;
-    width:50vw;
-    height:50vh;
+    width:30vw;
+    height:70vh;
     transform: translate(-50%, -50%);
     z-index:100000000000000000;
     opacity: 100%;
@@ -89,7 +97,7 @@
     float:right;
     height:3%;
     width:3%;
-    left: 97%;
+    left: 96%;
     top: .3%;
     position:absolute;
     background-color:transparent;
@@ -99,7 +107,8 @@
     color:var(--darkgreen);
     border-radius:4px;
     z-index:100000000000000000;
-    padding-right:1px;
+    margin-right:2px;
+    padding-right:2px;
     }
 
 #cancel:hover{
