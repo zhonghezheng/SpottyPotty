@@ -66,20 +66,15 @@ def pseduoRate(name):
     for b in [p.bathroom_male, p.bathroom_female, p.bathroom_inclusive]:
         b.cleanliness.total += random.randint(1, 5)
         b.cleanliness.count += 1
-        b.cleanliness.save()
         b.hygiene.total += random.randint(1, 5)
         b.hygiene.count += 1
-        b.hygiene.save()
         b.accessiblity.total += random.randint(1, 5)
         b.accessiblity.count += 1
-        b.accessiblity.save()
         b.safety.total += random.randint(1, 5)
         b.safety.count += 1
-        b.safety.save()
         b.freeperiodProducts=bool(random.randint(0, 1))
         b.paidperiodProducts=bool(random.randint(0, 1))
         b.update()
-        #print(name, b)
         b.save()
 
 for n in names:

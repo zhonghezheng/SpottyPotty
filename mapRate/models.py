@@ -11,6 +11,7 @@ class Rating(models.Model):
             self.average = 0
         else:
             self.average = self.total / self.count
+            self.average = round(self.average, 1)
         self.save()
 
     def __str__(self):
@@ -34,7 +35,7 @@ class Bathroom(models.Model):
         self.hygiene.update_avg()
         self.safety.update_avg()
         self.accessiblity.update_avg()
-        self.avg = (self.cleanliness.average+self.hygiene.average+self.safety.average+self.accessiblity.average)/4
+        self.avg = round((self.cleanliness.average+self.hygiene.average+self.safety.average+self.accessiblity.average)/4, 1)
  
 
     def __str__(self):
