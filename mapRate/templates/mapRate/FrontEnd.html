@@ -31,7 +31,6 @@
         </div>
 
         <br>
-        <br>
 
         <div id="distance">
           <p id="subt">Distance: <span id="slider_val"></span></p>
@@ -96,11 +95,11 @@
 
         </script>
         <br>
-        <br>
 
         <p id="subt">Hygiene Products</p>
         <div id="hygene">
           <input type="checkbox" id="freeHygiene" value="{{settings.free}}"> Free
+          <br>
           <input type="checkbox" id="paidHygiene" value="{{settings.paid}}"> Paid
         </div>
 
@@ -223,18 +222,19 @@
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
+          message.className = 'center';
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
-          message.innerHTML = '<h1> &nbsp'+bname+'</h1>\n&nbsp'
+          message.innerHTML = '<h1> &nbsp'+bname+'</h1>'
           if (m != 'None'){
-            message.innerHTML += '<button id="mbuttonmore"> Male </button>';
+            message.innerHTML += '<button class="gbutton" id="mbuttonmore"> Male </button>';
           }
           if (f != 'None'){
-            message.innerHTML += '<button id="fbuttonmore"> Female </button>';
+            message.innerHTML += '<button class="gbutton" id="fbuttonmore"> Female </button>';
           }
           if (i != 'None'){
-            message.innerHTML += '<button id="ibuttonmore"> Gender Inclusive </button>\n';
+            message.innerHTML += '<button class="gbutton" id="ibuttonmore"> Gender Inclusive </button>\n';
           } 
           if (m != 'None'){
             message.innerHTML += giveInnerDiv(m,  "mmoredisplay");
@@ -276,23 +276,23 @@
       function giveInnerDiv(b, id)
       {
           bArray = b.split(",");
-          divToAdd = '<div class="bathinfo" id = "'+id+'"><br/>&nbspGender: ' + bArray[0] + '<br/>';
+          divToAdd = '<div class="bathinfo" id = "'+id+'"><br/>&nbsp<b>Gender:</b> ' + bArray[0] + '<br/>';
           if (bArray[1] == "True"){
-            divToAdd += '&nbspFree Period Products: Available <br/>';
+            divToAdd += '&nbsp<b>Free Period Products:</b> Available <br/>';
           }
           else {
-             divToAdd += '&nbspFree Period Products: Not Available <br/>';
+             divToAdd += '&nbsp<b>Free Period Products:</b> Not Available <br/>';
           }
           if (bArray[2] == "True"){
-            divToAdd+= '&nbspPaid Period Products: Available <br/>';
+            divToAdd+= '&nbsp<b>Paid Period Products:</b> Available <br/>';
           }
           else {
-            divToAdd+= '&nbspPaid Period Products: Not Available <br/>';
+            divToAdd+= '&nbsp<b>Paid Period Products:</b> Not Available <br/>';
           }
-          divToAdd+="&nbspCleanliness: " + bArray[3] + " ⭐" + "<br/>"
-          divToAdd+="&nbspHygienic Products: " + bArray[4] + " ⭐" + "<br/>"
-          divToAdd+="&nbspSafety: " + bArray[5] + " ⭐" + "<br/>"
-          divToAdd+="&nbspAccessibility: " + bArray[6] + " ⭐" + "<br/>"
+          divToAdd+="&nbsp<b>Cleanliness:</b> " + bArray[3] + " ⭐" + "<br/>"
+          divToAdd+="&nbsp<b>Hygienic Products:</b> " + bArray[4] + " ⭐" + "<br/>"
+          divToAdd+="&nbsp<b>Safety:</b> " + bArray[5] + " ⭐" + "<br/>"
+          divToAdd+="&nbsp<b>Accessibility:</b> " + bArray[6] + " ⭐" + "<br/>"
           console.log(divToAdd);
           return divToAdd;
       }
@@ -371,6 +371,7 @@
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
+          message.className = 'center';
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
@@ -483,7 +484,7 @@
     <ul>
       {% for pin in pins %}
         <script>
-          popup = '<center><b>{{pin.name}}</b></center>';
+          popup = '<center><b>{{pin.name}}</b></center>' // the popup text
           popup += '<p style="font-size:1px"> <br></p>';
           if ('{{pin.bathroom_male.avg}}' != 0)
           {
@@ -500,10 +501,10 @@
           popup += '<p style="font-size:${8}px"></p>';
           popup += '<div><button class="ratebutton" onclick="openRating(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">rate</button>';
           popup += '<button class="button" onclick="OpenModal(\'{{pin.name}}\',\'{{pin.bathroom_male}}\', \'{{pin.bathroom_female}}\', \'{{pin.bathroom_inclusive}}\')">info</button><br></div>';
-
+                      
           var pin = L.marker(['{{pin.latitude}}', '{{pin.longitude}}'],
-          {alt: '{{pin.name}}', title: '{{pin.name}}'}).addTo(map)
-          .bindPopup(popup);
+          {alt: '{{pin.name}}', title: '{{pin.name}}', }).addTo(map)
+          .bindPopup(popup, {minWidth:130});
         </script>
       {% endfor %}
     </ul>
