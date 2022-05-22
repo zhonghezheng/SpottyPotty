@@ -33,12 +33,28 @@ def filter_dict(pins, r):
             candidates.append(pin.bathroom_inclusive)
         candidates = list(filter(lambda b: b.avg >= float(r["rating"]), candidates))
         candidates = list(filter(lambda b: products_filter(b, r["free"] == "true", r["paid"] == "true"), candidates))
+        # TODO: filter for distance when distance worksq
         if len(candidates) > 0:
             filtered.append(pin)
     return filtered
 
+def update_settings(r):
+    for k in r:
+        r[k] = r[k][0]
+    settings = {}
+    settings["m"] = r["m"]
+    settings["f"] = r["f"]
+    settings["i"] = r["i"]
+    settings["distance"] = r["distance"]
+    settings["free"] = r["free"]
+    settings["paid"] = r["paid"]
+    settings["rating"] = r["rating"]
+    return settings
+
+
 def main(request):
     defaultPins = Pin.objects.all()
+    defaultSettings = {"m": "false", "f": "false", "i": "false", "distance": "0.3", "free": "false", "paid": "false", "rating": 1}
     if (request.method == "POST"):
         r = request.POST
         if r["type"] == "rate":
@@ -62,5 +78,6 @@ def main(request):
             b.save()
         elif r["type"] == "filter":
             defaultPins = filter_dict(defaultPins, dict(r))
-            
-    return render(request, "mapRate/Frontend.html", {"pins": defaultPins})
+            defaultSettings = update_settings(dict(r))
+    print(defaultSettings)
+    return render(request, "mapRate/Frontend.html", {"pins": defaultPins, "settings": defaultSettings})
