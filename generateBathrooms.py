@@ -27,6 +27,10 @@ bathrooms = [["Aldrich Hall", 33.64854669998156, -117.84122589999998, True],
 ["Social Science Plaza B", 33.6472138340985, -117.83912613095008, True],
 ["Steinhaus Hall", 33.64641757311412, -117.84489568862256, True],
 ["Student Center", 33.64909423653421, -117.84223294730018, True]]
+names = []
+for b in bathrooms:
+    names.append(b[0])
+
 rCounter = 0
 bCounter = 0
 for b in bathrooms:
