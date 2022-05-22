@@ -5,6 +5,12 @@ from .models import Bathroom, Pin
 
 # Create your views here.
 
+# returns distance in miles
+def distance(lat1, lon1, lat2, lon2):
+    dx = lon1 * 69 - lon2 * 69
+    dy = lat1 * 69 - lon2 * 69
+    return (dx ** 2 + dy ** 2) ** 0.5
+
 def products_filter(bathroom, free, paid):
     if not free and not paid:
         return True
@@ -24,6 +30,12 @@ def filter_dict(pins, r):
         r["i"] = "true"
     filtered = []
     for pin in pins:
+        lat1, lon1 = r["latitude"], r["longitude"]
+        lat2, lon2 = pin.latitude, pin.longitude
+        miles = distance(lat1, lon1, lat2, lon2)
+        if r["distance"] > miles:
+            continue
+
         candidates = []
         if r["m"] == "true" and pin.bathroom_male is not None:
             candidates.append(pin.bathroom_male)
@@ -33,7 +45,6 @@ def filter_dict(pins, r):
             candidates.append(pin.bathroom_inclusive)
         candidates = list(filter(lambda b: b.avg >= float(r["rating"]), candidates))
         candidates = list(filter(lambda b: products_filter(b, r["free"] == "true", r["paid"] == "true"), candidates))
-        # TODO: filter for distance when distance worksq
         if len(candidates) > 0:
             filtered.append(pin)
     return filtered
@@ -57,6 +68,8 @@ def main(request):
     defaultSettings = {"m": "false", "f": "false", "i": "false", "distance": "0.3", "free": "false", "paid": "false", "rating": 1}
     if (request.method == "POST"):
         r = request.POST
+        print(r["latitude"])
+        print(r["longitude"])
         if r["type"] == "rate":
             b = Bathroom.objects.get(name="name")
             if r["cleanliness"] != "":
@@ -77,5 +90,4 @@ def main(request):
         elif r["type"] == "filter":
             defaultPins = filter_dict(defaultPins, dict(r))
             defaultSettings = update_settings(dict(r))
-    print(defaultSettings)
     return render(request, "mapRate/Frontend.html", {"pins": defaultPins, "settings": defaultSettings})
