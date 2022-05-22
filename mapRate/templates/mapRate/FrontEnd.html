@@ -77,6 +77,23 @@
               paidHygiene.checked=true;
               paidHygiene.removeAttribute("value");
             }
+
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPos);
+            }
+
+            function showPos(position)
+            {
+              var circle = L.circle([position.coords.latitude, position.coords.longitude], {
+                    color: 'blue',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: 10
+                }).addTo(map)
+            }
+
+
+
           });
         </script>
         <br>
@@ -154,14 +171,9 @@
         function showPosition(position) {
           form.innerHTML += '<input type="number" name="longitude" value=' + position.coords.longitude+'>\n'; 
           form.innerHTML += '<input type="number" name="latitude" value=' + position.coords.latitude+'>\n';
-
-          var circle = L.circle([position.coords.latitude, position.coords.longitude], {
-                color: 'blue',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: 10
-            }).addTo(map)
         }
+
+        
 
         console.log(form);
         document.body.appendChild(form);
