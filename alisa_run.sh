@@ -4,11 +4,11 @@ echo ''
 echo ''
 echo ''
 echo ''
-echo 'WOO SOMEONE IS ACTUALLY USING MY BASH COMMAND WOOOOO'
+echo 'hi alisa!'
 echo ''
 echo ''
 echo ''
 echo ''
 echo ''
 echo ''
-python3 manage.py runserver
+py manage.py runserver
