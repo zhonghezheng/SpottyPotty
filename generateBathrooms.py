@@ -79,7 +79,7 @@ def pseduoRate(name):
         b.freeperiodProducts=bool(random.randint(0, 1))
         b.paidperiodProducts=bool(random.randint(0, 1))
         b.update()
-        print(name, b)
+        #print(name, b)
         b.save()
 
 for n in names:

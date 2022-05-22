@@ -11,6 +11,7 @@ class Rating(models.Model):
             self.average = 0
         else:
             self.average = self.total / self.count
+        self.save()
 
     def __str__(self):
         return str(self.average)
