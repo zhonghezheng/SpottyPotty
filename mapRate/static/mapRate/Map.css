@@ -23,6 +23,7 @@
 
 #content
 {
+    font-family:Arial, Helvetica, sans-serif;
     margin-left: 10px;
     size: auto;
 }
@@ -60,8 +61,13 @@
     float:left;
 }
 
-.clear {
-    clear:both;
+.gbutton {
+    cursor:pointer;
+    background-color:var(--lightblue);
+    float:center;
+    border: 1px solid var(--blue);
+    border-radius:1px;
+    margin-right:5px;
 }
 
 .button {
@@ -72,13 +78,19 @@
     float:right;
 }
 
+.center {
+    text-align:center;
+    width:100%;
+    padding:3px;
+}
+
 .outerpopup {
     position:absolute;
     display:flex;
     top: 50%;
     left: 50%;
-    width:50vw;
-    height:50vh;
+    width:30vw;
+    height:80vh;
     transform: translate(-50%, -50%);
     z-index:100000000000000000;
     opacity: 100%;
@@ -86,6 +98,7 @@
     border:1px solid var(--blue);
     box-shadow: 0 0 0 100vmax rgba(0,0,0,.3);
     border-radius: 1%;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .cancel{
@@ -95,7 +108,7 @@
     float:right;
     height:3%;
     width:3%;
-    left: 97%;
+    left: 95%;
     top: .3%;
     position:absolute;
     background-color:transparent;
