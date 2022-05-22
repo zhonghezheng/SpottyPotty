@@ -33,7 +33,7 @@ class Bathroom(models.Model):
         self.hygiene.update_avg()
         self.safety.update_avg()
         self.accessiblity.update_avg()
-        self.avg = (self.cleanliness.average+self.hygiene.average+self.safety.average+self.accessibility.average)/4
+        self.avg = (self.cleanliness.average+self.hygiene.average+self.safety.average+self.accessiblity.average)/4
  
 
     def __str__(self):
