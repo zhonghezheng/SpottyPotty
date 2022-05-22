@@ -69,7 +69,15 @@ def main(request):
     if (request.method == "POST"):
         r = request.POST
         if r["type"] == "rate":
-            b = Bathroom.objects.get(name="name")
+            p = Pin.objects.get(name="name")
+            b = p.bathroom_male
+            if r['gender']=="M":
+                b = p.bathroom_male
+            elif r['gender'] == "F":
+                b = p.bathroom_female
+            elif r['gender'] == "I":
+                b = p.bathroom_inclusive
+            
             if r["cleanliness"] != "":
                 b.cleanliness.total += int(r["cleanliness"])
                 b.cleanliness.count += 1
