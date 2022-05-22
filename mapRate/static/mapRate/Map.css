@@ -71,7 +71,8 @@
     margin:2px;
   }
   
-  .dropdown-content {
+  .dropdown-content 
+  {
     display: none;
     position: absolute;
     right: 0;
@@ -235,4 +236,9 @@
     text-align: left;
     margin-left: 20px;
     line-height: 30px;
+}
+
+.rating
+{
+    margin-left: 20px;;
 }
