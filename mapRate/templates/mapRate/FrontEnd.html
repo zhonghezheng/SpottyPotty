@@ -169,15 +169,14 @@
         }
 
         function showPosition(position) {
+          
           form.innerHTML += '<input type="number" name="longitude" value=' + position.coords.longitude+'>\n'; 
           form.innerHTML += '<input type="number" name="latitude" value=' + position.coords.latitude+'>\n';
+          document.body.appendChild(form);
+          form.submit();
+          console.log(position.coords.latitude);
+
         }
-
-        
-
-        console.log(form);
-        document.body.appendChild(form);
-        form.submit();
       }
       
       function sendRating()
