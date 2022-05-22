@@ -300,6 +300,7 @@
 
       function sendRating()
       {
+        
         var form = document.createElement('form');
         var sliderClean = document.getElementById("slider_Clean");
         var outputClean = document.getElementById("sliderClean_val");
@@ -344,6 +345,7 @@
           outputSafety.innerHTML = this.value;
         }
 
+        var selectedGender = document.getElementById("selectedGender");
 
         form.action = "{% url 'main' %}";
         form.method = "post";
@@ -354,6 +356,21 @@
         form.innerHTML += '<input type="text" name = "safety" value='+sliderSafety.checked+'>\n';
         form.innerHTML += '<input type="text" name = "free" value='+freeRate.checked+'>\n';
         form.innerHTML += '<input type="text" name = "paid" value='+paidRate.checked+'>\n';
+
+        if (selectedGender.innerHTML == "Men")
+        {
+          form.innerHTML += '<input type="text" name = "gender" value=M>\n';
+        }
+
+        else if (selectedGender.innerHTML == "Women")
+        {
+          form.innerHTML += '<input type="text" name = "gender" value=F>\n';
+        }
+        else if (selectedGender.innerHTML == "Gender Inclusive")
+        {
+          form.innerHTML += '<input type="text" name = "gender" value=I>\n';
+        }
+          
         console.log(form);
         document.body.appendChild(form);
         form.submit();
@@ -379,6 +396,15 @@
           var x = document.createElement('div');
           
           x.innerHTML = 
+          `<div class="dropdown" style="float:left;">
+              <button class="dropbtn">Gender</button> <span id="selectedGender"></span>
+              <div class="dropdown-content">
+                <button onclick="menSelected()">Men</button>
+                <button onclick="womenSelected()">Female</button>
+                <button onclick="inclusiveSelected()">Inclusive</button>
+              </div>
+            </div>`
+          x.innerHTML += 
               `<p id="subt2">Cleanliness: <span id="sliderClean_val"></span></p>
               <input type="range" min="1" max="5" value="0" id="slider_Clean" list="steplistRate" >
               <datalist id="steplistRate">
@@ -427,7 +453,7 @@
             </datalist>`;
 
             x.innerHTML += 
-              `<p id="subt2">Free Products: </span> <input type="checkbox" id="freeRate" value="0"></p>
+              `<p id="subt2">Free Products: <input type="checkbox" id="freeRate" value="0"></p>
             </datalist>`;
 
             x.innerHTML += 
@@ -477,6 +503,24 @@
               outputSafety.innerHTML = this.value;
             }
           }
+      }
+
+      function menSelected()
+      {
+        var gender = document.getElementById("selectedGender");
+        gender.innerHTML = "Men";
+      }
+
+      function womenSelected()
+      {
+        var gender = document.getElementById("selectedGender");
+        gender.innerHTML = "Women";
+      }
+
+      function inclusiveSelected()
+      {
+        var gender = document.getElementById("selectedGender");
+        gender.innerHTML = "Gender Inclusive";
       }
 
     </script>
