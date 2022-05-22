@@ -241,10 +241,11 @@
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
           var message = document.createElement('p');
+          message.className = 'center';
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
-          message.innerHTML = '<h1 style="text-align:center;"> &nbsp'+bname+'</h1>'
+          message.innerHTML = '<h1> &nbsp'+bname+'</h1>'
           if (m != 'None'){
             message.innerHTML += '<button class="gbutton" id="mbuttonmore"> Male </button>';
           }
