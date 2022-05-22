@@ -7,9 +7,9 @@ from .models import Bathroom, Pin
 
 # returns distance in miles
 def distance(lat1, lon1, lat2, lon2):
-    print('here')
-    dx = lon1 * 69 - lon2 * 69
-    dy = lat1 * 69 - lon2 * 69
+    dx = lon1 * 54 - lon2 * 54
+    dy = lat1 * 69 - lat2 * 69
+    print(dx, dy)
     return (dx ** 2 + dy ** 2) ** 0.5
 
 def products_filter(bathroom, free, paid):
@@ -31,10 +31,12 @@ def filter_dict(pins, r):
         r["i"] = "true"
     filtered = []
     for pin in pins:
-        lat1, lon1 = r["latitude"], r["longitude"]
+        lat1, lon1 = float(r["latitude"]), float(r["longitude"])
         lat2, lon2 = pin.latitude, pin.longitude
         miles = distance(lat1, lon1, lat2, lon2)
-        if r["distance"] > miles:
+        print(miles)
+        print(float(r["distance"]))
+        if float(r["distance"]) < miles:
             continue
 
         candidates = []
