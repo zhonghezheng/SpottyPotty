@@ -36,8 +36,9 @@
 
 #subt2
 {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
+    float:left;
 }
 
 #map 
@@ -50,16 +51,24 @@
 }
 
 .dropbtn {
-    background-color: transparent;
-    padding: 16px;
-    border: none;
-    cursor: pointer;
+    position:relative;
+    padding: 5px;
+    margin:3px;
+    cursor:pointer;
+    background-color:var(--lightblue);
+    border-radius:10%;
+    border: 1px solid var(--blue);
   }
   
   .dropdown {
     position: relative;
     display: inline-block;
     width:200px;
+    align-items:center;
+    display:flex;
+    justify-content:center;
+    border-radius:1px;
+    margin:2px;
   }
   
   .dropdown-content {
@@ -69,7 +78,7 @@
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1000000000000000000;
   }
   
   .dropdown-content button {
@@ -182,6 +191,36 @@
   }
 
   #slider_Clean {
+    width: 75%;
+    height: 25px;
+    opacity: 0.7;
+    background-color: gainsboro;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    cursor: pointer;
+  }
+
+  #slider_Hygiene {
+    width: 75%;
+    height: 25px;
+    opacity: 0.7;
+    background-color: gainsboro;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    cursor: pointer;
+  }
+
+  #slider_Accessibility {
+    width: 75%;
+    height: 25px;
+    opacity: 0.7;
+    background-color: gainsboro;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    cursor: pointer;
+  }
+
+  #slider_Safety {
     width: 75%;
     height: 25px;
     opacity: 0.7;

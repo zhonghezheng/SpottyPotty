@@ -306,8 +306,6 @@
         var outputClean = document.getElementById("sliderClean_val");
         outputClean.innerHTML = sliderClean.value;
 
-        console.log("works");
-
         var sliderHygiene = document.getElementById("slider_Hygiene");
         var outputHygiene = document.getElementById("sliderHygiene_val");
         outputHygiene.innerHTML = sliderHygiene.value;
@@ -392,25 +390,25 @@
           cancel.innerHTML = '✖';
           cancel.onclick = function (e) { outerpopup.parentNode.removeChild(outerpopup);
           clicked = false; };
-          var message = document.createElement('p');
-          message.className = 'center';
           outerpopup.appendChild(cancel);
-          outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
 
           var x = document.createElement('div');
+          //x.className = 'left';
           
           x.innerHTML = 
           `<div class="dropdown" style="float:left;">
-              <button class="dropbtn">Gender</button> <span id="selectedGender"></span>
+              <p id="subt2">Gender:</p>
+              <button class="dropbtn">Select</button> <span id="selectedGender"></span>
               <div class="dropdown-content">
                 <button onclick="menSelected()">Men</button>
                 <button onclick="womenSelected()">Female</button>
                 <button onclick="inclusiveSelected()">Inclusive</button>
               </div>
-            </div>`
+            </div><br>`
           x.innerHTML += 
               `<p id="subt2">Cleanliness: <span id="sliderClean_val"></span></p>
+              <br>
               <input type="range" min="1" max="5" value="0" id="slider_Clean" list="steplistRate" >
               <datalist id="steplistRate">
                 <option>0</option>
@@ -419,10 +417,11 @@
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-            </datalist>`;
+            </datalist><br>`;
 
             x.innerHTML += 
-              `<p id="subt2">Hyginene: <span id="sliderHygiene_val"></span></p>
+              `<p id="subt2">Hygiene: <span id="sliderHygiene_val"></span></p>
+              <br>
               <input type="range" min="1" max="5" value="0" id="slider_Hygiene" list="steplistRate" >
               <datalist id="steplistRate">
                 <option>0</option>
@@ -431,10 +430,11 @@
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-            </datalist>`;
+            </datalist><br>`;
 
             x.innerHTML += 
               `<p id="subt2">Accessibility: <span id="sliderAccessibility_val"></span></p>
+              <br>
               <input type="range" min="1" max="5" value="0" id="slider_Accessibility" list="steplistRate" >
               <datalist id="steplistRate">
                 <option>0</option>
@@ -443,10 +443,11 @@
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-            </datalist>`;
+            </datalist><br>`;
 
             x.innerHTML += 
               `<p id="subt2">Safety: <span id="sliderSafety_val"></span></p>
+              <br>
               <input type="range" min="1" max="5" value="0" id="slider_Safety" list="steplistRate" >
               <datalist id="steplistRate">
                 <option>0</option>
@@ -455,15 +456,13 @@
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-            </datalist>`;
+            </datalist><br>`;
 
             x.innerHTML += 
-              `<p id="subt2">Free Products: <input type="checkbox" id="freeRate" value="0"></p>
-            </datalist>`;
+              `<p id="subt2">Free Products: <input type="checkbox" id="freeRate" value="0"></p><br>`;
 
             x.innerHTML += 
-              `<p id="subt2">Paid Products: <input type="checkbox" id="paidRate" value="0"></p>
-            </datalist>`;
+              `<p id="subt2">Paid Products: <input type="checkbox" id="paidRate" value="0"></p><br>`;
 
             x.innerHTML +=`<br><button id="EnterBtn2">Enter</button>`;
             outerpopup.appendChild(x);
