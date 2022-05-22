@@ -121,7 +121,7 @@
         </div>
 
         <br>
-        <button id="EnterBtn" onclick="buttonClicked()">Enter</button>
+        <button id="EnterBtn" onclick="buttonClicked()">Submit</button>
       </div>
     </div>
 
@@ -459,12 +459,15 @@
             </datalist><br>`;
 
             x.innerHTML += 
-              `<p id="subt2">Free Products: <input type="checkbox" id="freeRate" value="0"></p><br>`;
+              `<p id="subt2">Free Products: <input type="checkbox" id="freeRate" value="0"></p>
+              <br>`;
 
             x.innerHTML += 
-              `<p id="subt2">Paid Products: <input type="checkbox" id="paidRate" value="0"></p><br>`;
+              `<p id="subt2">Paid Products: <input type="checkbox" id="paidRate" value="0"></p>
+              <br>`;
 
-            x.innerHTML +=`<br><button id="EnterBtn2">Enter</button>`;
+            x.innerHTML +=`<button id="EnterBtn2">Submit</button><div>`;
+
             outerpopup.appendChild(x);
             console.log(name);
             document.getElementById("EnterBtn2").addEventListener('click', () => sendRating(name));

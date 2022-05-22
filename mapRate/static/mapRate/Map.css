@@ -65,7 +65,7 @@
     display: inline-block;
     width:200px;
     align-items:center;
-    display:flex;
+    
     justify-content:center;
     border-radius:1px;
     margin:2px;
@@ -94,10 +94,6 @@
   .dropdown:hover .dropdown-content {display: block;}
   .dropdown:hover .dropbtn {background-color: grey;}
 
-
-.flexbox {
-    display:flex;
-}
 
 .ratebutton {
     cursor:pointer;
@@ -240,5 +236,22 @@
 
 .rating
 {
-    margin-left: 20px;;
+    margin-left: 20px;
+}
+
+#EnterBtn2
+{
+    float:left;
+    position:absolute;
+    cursor:pointer;
+    background-color:var(--lightblue);
+    border: 1px solid var(--blue);
+    border-radius:1px;
+}
+
+#EnterBtn {
+    cursor:pointer;
+    background-color:var(--lightblue);
+    border: 1px solid var(--blue);
+    border-radius:1px;
 }
