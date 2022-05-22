@@ -9,7 +9,6 @@ from .models import Bathroom, Pin
 def distance(lat1, lon1, lat2, lon2):
     dx = lon1 * 54 - lon2 * 54
     dy = lat1 * 69 - lat2 * 69
-    print(dx, dy)
     return (dx ** 2 + dy ** 2) ** 0.5
 
 def products_filter(bathroom, free, paid):
@@ -34,12 +33,8 @@ def filter_dict(pins, r):
         lat1, lon1 = float(r["latitude"]), float(r["longitude"])
         lat2, lon2 = pin.latitude, pin.longitude
         miles = distance(lat1, lon1, lat2, lon2)
-        print(miles)
-        print(float(r["distance"]))
         if float(r["distance"]) < miles:
-            print("too far because", float(r["distance"]), "<", miles)
             continue
-        print("not too far because", float(r["distance"]), ">", miles)
 
         candidates = []
         if r["m"] == "true" and pin.bathroom_male is not None:
@@ -52,7 +47,6 @@ def filter_dict(pins, r):
         candidates = list(filter(lambda b: products_filter(b, r["free"] == "true", r["paid"] == "true"), candidates))
         if len(candidates) > 0:
             filtered.append(pin)
-    print(len(filtered))
     return filtered
 
 def update_settings(r):
@@ -74,7 +68,6 @@ def main(request):
     defaultSettings = {"m": "false", "f": "false", "i": "false", "distance": "0.3", "free": "false", "paid": "false", "rating": 1}
     if (request.method == "POST"):
         r = request.POST
-        print(r.dict())
         if r["type"] == "rate":
             b = Bathroom.objects.get(name="name")
             if r["cleanliness"] != "":
