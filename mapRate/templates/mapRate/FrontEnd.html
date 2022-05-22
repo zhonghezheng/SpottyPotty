@@ -78,8 +78,9 @@
               paidHygiene.checked=true;
               paidHygiene.removeAttribute("value");
             }
+          });
 
-            if (navigator.geolocation) {
+          if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(showPos);
             }
 
@@ -93,9 +94,6 @@
                 }).addTo(map)
             }
 
-
-
-          });
         </script>
         <br>
         <br>
@@ -165,7 +163,7 @@
         form.innerHTML += '<input type="text" name ="paid" value='+paidHygiene.checked+'>\n';
         form.innerHTML += '<input type="number" name="distance" value='+slider.value+'>\n';
         form.innerHTML += '<input type="number" name="rating" value=' + sliderRate.value+'>\n';
-        
+      
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition);
         }
@@ -181,23 +179,6 @@
         document.body.appendChild(form);
         form.submit();
       }
-      
-      function sendRating()
-      // UNFINISHED SEND RATING FUNCTION
-      {
-        var form = document.createElement('form');
-        form.action = "{% url 'main' %}";
-        form.method = "post";
-        form.innerHTML = '{% csrf_token %}\n<input type="text" value="rate" name="type">\n';
-        form.innerHTML += '<input type="text" name = "name" value='+men.checked+'>\n';
-        form.innerHTML += '<input type="text" name = "cleanliness" value='+men.checked+'>\n';
-        form.innerHTML += '<input type="text" name = "hygiene" value='+men.checked+'>\n';
-        form.innerHTML += '<input type="text" name = "accessibility" value='+men.checked+'>\n';
-        form.innerHTML += '<input type="text" name = "safety" value='+men.checked+'>\n';
-        form.innerHTML += '<input type="text" name = "free" value='+men.checked+'>\n';
-        form.innerHTML += '<input type="text" name = "paid" value='+men.checked+'>\n';
-      }
-
     </script>
 
 
@@ -292,7 +273,9 @@
           document.getElementById(status).style.display = 'block';
         }
       }
-      function giveInnerDiv(b, id){
+
+      function giveInnerDiv(b, id)
+      {
           bArray = b.split(",");
           divToAdd = '<div class="bathinfo" id = "'+id+'"><br/>&nbspGender: ' + bArray[0] + '<br/>';
           if (bArray[1] == "True"){
@@ -313,10 +296,71 @@
           divToAdd+="&nbspAccessibility: " + bArray[6] + " ⭐" + "<br/>"
           console.log(divToAdd);
           return divToAdd;
+      }
+
+      function sendRating()
+      {
+        var form = document.createElement('form');
+        var sliderClean = document.getElementById("slider_Clean");
+        var outputClean = document.getElementById("sliderClean_val");
+        outputClean.innerHTML = sliderClean.value;
+
+        console.log("works");
+
+        var sliderHygiene = document.getElementById("slider_Hygiene");
+        var outputHygiene = document.getElementById("sliderHygiene_val");
+        outputHygiene.innerHTML = sliderHygiene.value;
+
+        var sliderAccessibility = document.getElementById("slider_Accessibility");
+        var outputAccessibility = document.getElementById("sliderAccessibility_val");
+        outputAccessibility.innerHTML = sliderAccessibility.value;
+
+        var sliderSafety = document.getElementById("slider_Safety");
+        var outputSafety = document.getElementById("sliderSafety_val");
+        outputSafety.innerHTML = sliderSafety.value;
+
+        var freeRate = document.getElementById("freeRate");
+
+        var paidRate = document.getElementById("paidRate");
+
+
+        sliderClean.oninput = function()
+        {
+          outputClean.innerHTML = this.value;
         }
 
-      function openRating(bname, m, f, i) {
-        console.log(m, f, i);
+        sliderHygiene.oninput = function()
+        {
+          outputHygiene.innerHTML = this.value;
+        }
+
+        sliderAccessibility.oninput = function()
+        {
+          outputAccessibility.innerHTML = this.value;
+        }
+
+        sliderSafety.oninput = function()
+        {
+          outputSafety.innerHTML = this.value;
+        }
+
+
+        form.action = "{% url 'main' %}";
+        form.method = "post";
+        form.innerHTML = '{% csrf_token %}\n<input type="text" value="rate" name="type">\n';
+        form.innerHTML += '<input type="text" name = "cleanliness" value='+sliderClean.value+'>\n';
+        form.innerHTML += '<input type="text" name = "hygiene" value='+sliderHygiene.value+'>\n';
+        form.innerHTML += '<input type="text" name = "accessibility" value='+sliderAccessibility.value+'>\n';
+        form.innerHTML += '<input type="text" name = "safety" value='+sliderSafety.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "free" value='+freeRate.checked+'>\n';
+        form.innerHTML += '<input type="text" name = "paid" value='+paidRate.checked+'>\n';
+        console.log(form);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    
+      function openRating() 
+      {
         if (!clicked) {
           clicked = true;
           var outerpopup = document.createElement('div');
@@ -331,37 +375,110 @@
           outerpopup.appendChild(cancel);
           outerpopup.appendChild(message);
           document.body.appendChild(outerpopup);
-          message.innerHTML = '<h1> &nbsp'+bname+'</h1>\n&nbsp'
-          if (m != 'None'){
-            message.innerHTML += '<button id="mbuttonmore"> Male </button>';
+
+          var x = document.createElement('div');
+          
+          x.innerHTML = 
+              `<p id="subt2">Cleanliness: <span id="sliderClean_val"></span></p>
+              <input type="range" min="1" max="5" value="0" id="slider_Clean" list="steplistRate" >
+              <datalist id="steplistRate">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </datalist>`;
+
+            x.innerHTML += 
+              `<p id="subt2">Hyginene: <span id="sliderHygiene_val"></span></p>
+              <input type="range" min="1" max="5" value="0" id="slider_Hygiene" list="steplistRate" >
+              <datalist id="steplistRate">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </datalist>`;
+
+            x.innerHTML += 
+              `<p id="subt2">Accessibility: <span id="sliderAccessibility_val"></span></p>
+              <input type="range" min="1" max="5" value="0" id="slider_Accessibility" list="steplistRate" >
+              <datalist id="steplistRate">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </datalist>`;
+
+            x.innerHTML += 
+              `<p id="subt2">Safety: <span id="sliderSafety_val"></span></p>
+              <input type="range" min="1" max="5" value="0" id="slider_Safety" list="steplistRate" >
+              <datalist id="steplistRate">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </datalist>`;
+
+            x.innerHTML += 
+              `<p id="subt2">Free Products: </span> <input type="checkbox" id="freeRate" value="0"></p>
+            </datalist>`;
+
+            x.innerHTML += 
+              `<p id="subt2">Paid Products: <input type="checkbox" id="paidRate" value="0"></p>
+            </datalist>`;
+
+            x.innerHTML +=
+            `<br><button id="EnterBtn" onclick="sendRating()">Enter</button>`;
+
+            outerpopup.appendChild(x);
+            console.log(x);
+
+            var sliderClean = document.getElementById("slider_Clean");
+            var outputClean = document.getElementById("sliderClean_val");
+            outputClean.innerHTML = sliderClean.value;
+
+
+            var sliderHygiene = document.getElementById("slider_Hygiene");
+            var outputHygiene = document.getElementById("sliderHygiene_val");
+            outputHygiene.innerHTML = sliderHygiene.value;
+
+            var sliderAccessibility = document.getElementById("slider_Accessibility");
+            var outputAccessibility = document.getElementById("sliderAccessibility_val");
+            outputAccessibility.innerHTML = sliderAccessibility.value;
+
+            var sliderSafety = document.getElementById("slider_Safety");
+            var outputSafety = document.getElementById("sliderSafety_val");
+            outputSafety.innerHTML = sliderSafety.value;
+
+            sliderClean.oninput = function()
+            {
+              outputClean.innerHTML = this.value;
+            }
+
+            sliderHygiene.oninput = function()
+            {
+              outputHygiene.innerHTML = this.value;
+            }
+
+            sliderAccessibility.oninput = function()
+            {
+              outputAccessibility.innerHTML = this.value;
+            }
+
+            sliderSafety.oninput = function()
+            {
+              outputSafety.innerHTML = this.value;
+            }
           }
-          if (f != 'None'){
-            message.innerHTML += '<button id="fbuttonmore"> Female </button>';
-          }
-          if (i != 'None'){
-            message.innerHTML += '<button id="ibuttonmore"> Gender Inclusive </button>\n';
-          } 
-          if (m != 'None'){
-            message.innerHTML += giveInnerDiv(m,  "mmoredisplay"); // CHANGE GIVE INNER DIV TO DIFF FUNCTION
-          }
-          if (f != 'None'){
-            message.innerHTML += giveInnerDiv(f, "fmoredisplay");
-          }
-          if (i!='None'){
-            message.innerHTML += giveInnerDiv(i, "imoredisplay");
-          }
-          if (m != 'None'){
-            document.getElementById("mbuttonmore").addEventListener('click', () => load_display('mmoredisplay'));
-          }
-          if (f != 'None'){
-            document.getElementById("fbuttonmore").addEventListener('click', () => load_display('fmoredisplay'));
-          }
-          if (i != 'None'){
-            document.getElementById("ibuttonmore").addEventListener('click', () => load_display('imoredisplay'));
-          }
-          load_display("");
-        }
       }
+
     </script>
     
     <ul>

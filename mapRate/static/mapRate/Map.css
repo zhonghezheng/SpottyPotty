@@ -29,7 +29,13 @@
 
 #subt
 {
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#subt2
+{
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -117,6 +123,16 @@
   }
 
   #sliderRate_distance {
+    width: 75%;
+    height: 25px;
+    opacity: 0.7;
+    background-color: gainsboro;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    cursor: pointer;
+  }
+
+  #slider_Clean {
     width: 75%;
     height: 25px;
     opacity: 0.7;
